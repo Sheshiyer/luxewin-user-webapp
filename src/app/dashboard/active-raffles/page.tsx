@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Raffle {
   id: string;
@@ -169,9 +170,13 @@ export default function ActiveRaffles() {
                     <p className="text-sm text-gray-400">Price per ticket</p>
                     <p className="text-lg font-semibold text-[#3399FF]">${raffle.price}</p>
                   </div>
-                  <button className="px-4 py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity">
+                  <Link
+                    href={`/raffle/${raffle.id}`}
+                    className="px-4 py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity"
+                    prefetch={false}
+                  >
                     Enter Raffle
-                  </button>
+                  </Link>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-400">

@@ -79,32 +79,66 @@
 - [ ] Add transaction history
 - [ ] Build notifications center
 
-## Phase 3: Raffle System (Week 3)
+## Phase 3: Raffle System (Week 3) - Current Priority
 
-### Raffle List
+### Raffle Entry Flow
 
-- [ ] Create raffle listing page
-- [ ] Implement raffle filtering
-- [ ] Add search functionality
-- [ ] Create raffle card component
-- [ ] Implement pagination
-- [ ] Add sorting options
+#### Step 1: Raffle Overview ✅
 
-### Raffle Details
+- [x] Create detailed product-style page for raffle
+- [x] Implement ticket counter with +/- controls
+- [x] Add participation button
+- [x] Display raffle details (prize, end date, etc.)
+- [x] Show current odds and participants
 
-- [ ] Build raffle detail page
-- [ ] Create ticket purchase interface
+#### Step 2: Multiplier System ✅
+
+- [x] Design and implement odds calculator
+- [x] Create combo selection interface
+- [x] Display bonus system and rewards
+- [x] Show odds increase with combo selection
+- [x] Add combo package presets
+
+#### Step 3: Quiz System ✅
+
+- [x] Generate dynamic questions from raffle context
+- [x] Create multiple choice question UI
+- [x] Implement answer validation
+- [x] Add progress indicator
+- [x] Show success/error states
+
+#### Step 4: Payment Flow
+
+- [x] Design payment form interface
+- [ ] Integrate Stripe payment system
+- [x] Add payment method selection
+- [ ] Implement secure checkout process
+- [x] Create confirmation screen
+
+### Raffle List ✅
+
+- [x] Create raffle listing page
+- [x] Implement raffle filtering
+- [x] Add search functionality
+- [x] Create raffle card component
+- [x] Implement pagination
+- [x] Add sorting options
+
+### Raffle Details ✅
+
+- [x] Build raffle detail page
+- [x] Create ticket purchase interface
 - [ ] Implement real-time updates
 - [ ] Add share functionality
 - [ ] Create related raffles section
-- [ ] Implement raffle stats
+- [x] Implement raffle stats
 
 ### Ticket Management
 
 - [x] Create ticket listing interface
 - [x] Implement ticket verification
-- [ ] Add ticket history
-- [ ] Create ticket detail view
+- [x] Add ticket history
+- [x] Create ticket detail view
 - [ ] Implement ticket filtering
 - [ ] Add export functionality
 
