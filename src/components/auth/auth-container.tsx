@@ -3,21 +3,15 @@
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { createBrowserClient } from '@supabase/ssr';
+import { useSearchParams } from 'next/navigation';
 
 interface AuthContainerProps {
   view?: 'sign_in' | 'sign_up' | 'forgotten_password';
 }
 
 export function AuthContainer({ view = 'sign_in' }: AuthContainerProps) {
-  const getRedirectUrl = () => {
-    if (typeof window === 'undefined') return '/dashboard';
-
-    const redirectPath =
-      new URLSearchParams(window.location.search).get('redirectTo') || '/dashboard';
-    return `${window.location.origin}${redirectPath}`;
-  };
-
-  const redirectTo = getRedirectUrl();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirectTo') || '/dashboard';
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -62,18 +56,9 @@ export function AuthContainer({ view = 'sign_in' }: AuthContainerProps) {
             divider:
               'before:bg-gray-300 after:bg-gray-300 dark:before:bg-gray-600 dark:after:bg-gray-600',
           },
-          style: {
-            button: {
-              borderRadius: '0.5rem',
-              padding: '0.625rem 1rem',
-            },
-            input: {
-              borderRadius: '0.5rem',
-            },
-          },
         }}
         providers={['google', 'github']}
-        redirectTo={redirectTo}
+        redirectTo={`${window.location.origin}${redirectTo}`}
       />
     </div>
   );
