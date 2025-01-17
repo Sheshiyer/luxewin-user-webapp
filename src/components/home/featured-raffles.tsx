@@ -1,84 +1,148 @@
-import { RaffleCard } from '@/components/raffle/raffle-card'
+import Image from 'next/image';
 
-// Temporary mock data - will be replaced with real data from API
+// Mock data matching the landing page
 const MOCK_RAFFLES = [
   {
     id: '1',
-    title: 'Luxury Watch Collection',
-    description: 'Win a curated collection of premium timepieces including Rolex, Omega, and Patek Philippe.',
-    image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1200',
-    ticketPrice: 99.99,
+    title: 'Rolex Daytona',
+    description: 'Limited Edition Platinum Daytona with custom diamond setting',
+    image: '/images/rolex-daytona.png',
+    ticketPrice: 250,
     totalTickets: 1000,
-    ticketsSold: 750,
-    endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days from now
+    ticketsSold: 456,
+    endDate: '2024-02-15',
     isActive: true,
+    value: '$45,000',
+    category: 'luxury',
   },
   {
     id: '2',
-    title: 'Ultimate Gaming Setup',
-    description: 'Complete gaming station with the latest RTX 4090, gaming chair, and premium peripherals.',
-    image: 'https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?q=80&w=1200',
-    ticketPrice: 49.99,
+    title: 'Luxury Villa in Bali',
+    description: '5-bedroom beachfront villa with private pool and staff',
+    image: '/images/luxury-villa.png',
+    ticketPrice: 500,
     totalTickets: 2000,
-    ticketsSold: 1800,
-    endDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day from now
+    ticketsSold: 892,
+    endDate: '2024-02-20',
     isActive: true,
+    value: '$2.5M',
+    category: 'travel',
   },
   {
     id: '3',
-    title: 'Dream Vacation Package',
-    description: 'All-inclusive luxury vacation for two to Maldives with premium resort stay.',
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=1200',
-    ticketPrice: 149.99,
-    totalTickets: 500,
-    ticketsSold: 480,
-    endDate: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString(), // 12 hours from now
+    title: 'Ferrari F8 Tributo',
+    description: '2023 Model with custom interior and track package',
+    image: '/images/ferrari-f8.png',
+    ticketPrice: 1000,
+    totalTickets: 5000,
+    ticketsSold: 2341,
+    endDate: '2024-03-01',
     isActive: true,
+    value: '$350,000',
+    category: 'luxury',
   },
-]
+];
 
 export function FeaturedRaffles() {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50/50 to-white dark:from-gray-900/50 dark:to-gray-800/50">
-      <div className="container mx-auto px-4 relative">
+    <section id="featured-raffles" className="py-16 sm:py-24 bg-[#0A0A0A]">
+      <div className="container mx-auto px-4 relative overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,102,204,0.02)_1px,transparent_1px),linear-gradient(0deg,rgba(0,102,204,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
-        
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(51,153,255,0.02)_1px,transparent_1px),linear-gradient(0deg,rgba(51,153,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
+
         {/* Decorative Blurs */}
-        <div className="absolute left-0 top-1/4 w-64 h-64 bg-[var(--primary-color)]/5 rounded-full blur-3xl" />
-        <div className="absolute right-0 bottom-1/4 w-64 h-64 bg-[var(--secondary-color)]/5 rounded-full blur-3xl" />
+        <div className="absolute left-0 top-1/4 w-64 h-64 bg-[#3399FF]/5 rounded-full blur-3xl" />
+        <div className="absolute right-0 bottom-1/4 w-64 h-64 bg-[#00FFCC]/5 rounded-full blur-3xl" />
+
         {/* Section Header */}
-        <div className="relative max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-color)] to-[var(--secondary-color)]">
-            Featured Raffles
+        <div className="relative max-w-3xl mx-auto text-center mb-12 md:mb-16">
+          <span className="inline-block text-sm font-semibold text-[#3399FF] mb-4 px-4 py-1.5 rounded-full bg-[#3399FF]/10">
+            Featured Opportunities
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#3399FF] to-[#00FFCC]">
+            Enter now for a chance to win these exclusive prizes
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Explore our handpicked selection of premium raffles with the best odds and exclusive prizes.
+          <p className="text-lg text-gray-400">
+            Join our premium raffles with the best odds and exclusive prizes.
           </p>
         </div>
 
         {/* Raffles Grid */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {MOCK_RAFFLES.map(raffle => (
-            <RaffleCard
-              key={raffle.id}
-              {...raffle}
-            />
+            <div key={raffle.id} className="card-interactive group">
+              <div className="aspect-w-16 aspect-h-9 relative h-48">
+                <Image src={raffle.image} alt={raffle.title} fill className="object-cover" />
+                <div className="absolute top-4 right-4">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-black/50 text-[#3399FF] backdrop-blur-sm">
+                    Value: {raffle.value}
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#3399FF] transition-colors">
+                  {raffle.title}
+                </h3>
+                <p className="text-sm text-gray-400 mb-4">{raffle.description}</p>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span className="text-gray-400">Tickets Available</span>
+                      <span className="text-white font-medium">
+                        {raffle.ticketsSold}/{raffle.totalTickets}
+                      </span>
+                    </div>
+                    <div className="w-full bg-[#1A1A1A] rounded-full h-2">
+                      <div
+                        className="bg-[#3399FF] h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${(raffle.ticketsSold / raffle.totalTickets) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-400">Price per ticket</p>
+                      <p className="text-lg font-semibold text-[#3399FF]">${raffle.ticketPrice}</p>
+                    </div>
+                    <button className="px-4 py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity">
+                      Enter Raffle
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-400">
+                      Ends {new Date(raffle.endDate).toLocaleDateString()}
+                    </span>
+                    <span
+                      className={`
+                      px-2 py-1 rounded-full text-xs font-medium
+                      ${
+                        raffle.ticketsSold / raffle.totalTickets > 0.8
+                          ? 'bg-red-900/30 text-red-400'
+                          : 'bg-green-900/30 text-green-400'
+                      }
+                    `}
+                    >
+                      {raffle.ticketsSold / raffle.totalTickets > 0.8
+                        ? 'Almost Sold Out'
+                        : 'Tickets Available'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 
         {/* View All Button */}
-        <div className="relative text-center mt-16">
-          <div className="inline-flex items-center">
-            <a
-              href="/raffles"
-              className="button-outline px-8 py-3 hover:scale-105 transition-transform duration-300 backdrop-blur-sm"
-            >
+        <div className="relative text-center mt-12 md:mt-16">
+          <div className="inline-flex items-center gap-2">
+            <button className="px-8 py-3 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity">
               View All Raffles
-            </a>
+            </button>
+            <span className="text-sm text-gray-400">{MOCK_RAFFLES.length}+ active raffles</span>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

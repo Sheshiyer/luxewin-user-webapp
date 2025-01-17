@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { useAuth } from '@/contexts/auth-context'
-import { Logo } from '@/components/ui/logo'
+import Link from 'next/link';
+import { useAuth } from '@/contexts/auth-context';
+import { Logo } from '@/components/ui/logo';
 
 export function Header() {
-  const { user, signOut } = useAuth()
+  const { user, signOut } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
@@ -18,24 +18,36 @@ export function Header() {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/raffles"
+            <a
+              href="#featured-raffles"
               className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+              onClick={e => {
+                e.preventDefault();
+                document.getElementById('featured-raffles')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Raffles
-            </Link>
-            <Link
-              href="/how-it-works"
+            </a>
+            <a
+              href="#how-it-works"
               className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+              onClick={e => {
+                e.preventDefault();
+                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               How It Works
-            </Link>
-            <Link
-              href="/winners"
+            </a>
+            <a
+              href="#winners"
               className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+              onClick={e => {
+                e.preventDefault();
+                document.getElementById('winners')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Winners
-            </Link>
+            </a>
           </nav>
 
           {/* Auth Buttons */}
@@ -48,10 +60,7 @@ export function Header() {
                 >
                   Dashboard
                 </Link>
-                <button
-                  onClick={() => signOut()}
-                  className="button-outline"
-                >
+                <button onClick={() => signOut()} className="button-outline">
                   Sign Out
                 </button>
               </>
@@ -63,10 +72,7 @@ export function Header() {
                 >
                   Sign In
                 </Link>
-                <Link
-                  href="/auth/sign-up"
-                  className="button-primary"
-                >
+                <Link href="/auth/sign-up" className="button-primary">
                   Get Started
                 </Link>
               </>
@@ -75,5 +81,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
