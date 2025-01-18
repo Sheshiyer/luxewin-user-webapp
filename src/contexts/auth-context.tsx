@@ -2,8 +2,8 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { User } from '@supabase/supabase-js';
-import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase/client';
 
 interface AuthContextType {
   user: User | null;
@@ -28,44 +28,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
   const checkAdminStatus = useCallback(async (currentUser: User) => {
     try {
-      console.log('Checking admin status for:', currentUser.email);
       const isUserAdmin = currentUser.email === 'mrhigh3r@gmail.com';
       setIsAdmin(isUserAdmin);
       return isUserAdmin;
-    } catch (error) {
-      console.error('Error checking admin status:', error);
+    } catch {
       setIsAdmin(false);
       return false;
     }
   }, []);
 
   useEffect(() => {
-    console.log('AuthProvider initializing...');
     let mounted = true;
 
     const initializeAuth = async () => {
       try {
-        // Get initial session
         const {
           data: { session },
           error: sessionError,
         } = await supabase.auth.getSession();
+
         if (sessionError) throw sessionError;
 
         if (session?.user) {
           setUser(session.user);
           await checkAdminStatus(session.user);
+
+          // Handle initial redirects
+          const currentPath = window.location.pathname;
+          const isUserAdmin = session.user.email === 'mrhigh3r@gmail.com';
+
+          if (isUserAdmin && currentPath === '/') {
+            router.push('/admin');
+          } else if (!isUserAdmin && currentPath.startsWith('/admin')) {
+            router.push('/dashboard');
+          } else if (currentPath.startsWith('/auth/') && session.user) {
+            const searchParams = new URLSearchParams(window.location.search);
+            const redirectTo = searchParams.get('redirectTo') || '/dashboard';
+            router.push(redirectTo);
+          }
         }
-      } catch (error) {
-        console.error('Error initializing auth:', error);
-        setError(error as Error);
+      } catch (err) {
+        setError(err as Error);
       } finally {
         if (mounted) {
           setLoading(false);
@@ -73,13 +78,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    initializeAuth();
+    // Wait for window to be available before initializing
+    if (typeof window !== 'undefined') {
+      initializeAuth();
+    }
 
     // Set up auth state change listener
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state changed:', { event, session });
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (!mounted) return;
 
       try {
@@ -99,8 +106,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         router.refresh();
-      } catch (error) {
-        console.error('Error in auth state change handler:', error);
+      } catch (err) {
+        setError(err as Error);
       }
     });
 
@@ -108,7 +115,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [supabase, router, checkAdminStatus]);
+  }, [router, checkAdminStatus]);
 
   const signOut = async () => {
     try {
@@ -120,9 +127,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         ? '/admin/login'
         : '/auth/sign-in';
       router.push(redirectPath);
-    } catch (error) {
-      console.error('Error signing out:', error);
-      setError(error as Error);
+    } catch (err) {
+      setError(err as Error);
     }
   };
 

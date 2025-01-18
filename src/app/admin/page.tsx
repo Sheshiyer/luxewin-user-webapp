@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '@/contexts/auth-context';
 interface StatsCard {
   title: string;
@@ -11,7 +11,7 @@ interface StatsCard {
 }
 
 export default function AdminPage() {
-  const { user, isAdmin, loading } = useAuth();
+  const { user } = useAuth();
   const [stats] = useState<StatsCard[]>([
     {
       title: 'Total Users',
@@ -102,10 +102,6 @@ export default function AdminPage() {
       ),
     },
   ]);
-
-  useEffect(() => {
-    console.log('Admin page mounted:', { user, isAdmin, loading });
-  }, [user, isAdmin, loading]);
 
   return (
     <div className="space-y-6" key={user?.id}>

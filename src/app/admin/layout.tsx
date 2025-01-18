@@ -157,10 +157,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   // Admin check
   useEffect(() => {
-    console.log('Admin layout auth state:', { user, isAdmin, loading });
     if (!loading && (!user || !isAdmin)) {
       const redirectPath = !user ? '/admin/login' : '/dashboard';
-      console.log(`Redirecting to ${redirectPath}`);
       router.push(redirectPath);
     }
   }, [user, loading, router, isAdmin]);
@@ -169,7 +167,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--primary-color)]"></div>
       </div>
     );
   }
@@ -179,14 +177,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return null;
   }
 
-  console.log('Admin layout rendering with auth user');
-
   return (
     <>
-      <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900 dark">
+      <div className="flex min-h-screen bg-[var(--background)]">
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#0A0A0A] text-white hover:bg-gray-800 transition-colors"
+          className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[var(--background)] text-[var(--foreground)] hover:bg-[var(--background-light)] transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -213,7 +209,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Sidebar */}
         <aside
-          className={`fixed inset-y-0 left-0 w-[280px] lg:w-64 bg-[#0A0A0A] border-r border-gray-800 transform transition-transform duration-300 lg:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 w-[280px] lg:w-64 bg-[var(--background)] border-r border-gray-800 transform transition-transform duration-300 lg:translate-x-0 ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -221,12 +217,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             {/* Admin Info */}
             <div className="p-4 border-b border-gray-800">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <span className="text-red-500 font-semibold">A</span>
+                <div className="w-10 h-10 rounded-full bg-[var(--primary-color)]/10 flex items-center justify-center">
+                  <span className="text-[var(--primary-color)] font-semibold">A</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-white truncate">Admin Panel</p>
-                  <p className="text-xs text-red-500">Administrator</p>
+                  <p className="text-sm font-medium text-[var(--foreground)] truncate">
+                    Admin Panel
+                  </p>
+                  <p className="text-xs text-[var(--primary-color)]">Administrator</p>
                 </div>
               </div>
             </div>
@@ -237,10 +235,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center px-4 py-2 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 ${
+                  className={`flex items-center px-4 py-2 text-sm rounded-lg hover:bg-[var(--background-light)]/50 ${
                     pathname === item.href
-                      ? 'bg-red-500/10 text-red-500'
-                      : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white'
+                      ? 'bg-[var(--primary-color)]/10 text-[var(--primary-color)]'
+                      : 'text-[var(--foreground)] hover:opacity-80'
                   }`}
                 >
                   <span className="mr-3">{item.icon}</span>
@@ -253,7 +251,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="p-4 border-t border-gray-800">
               <button
                 onClick={() => signOut()}
-                className="flex items-center justify-center w-full space-x-2 px-4 py-2 text-sm text-red-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                className="flex items-center justify-center w-full space-x-2 px-4 py-2 text-sm text-[var(--primary-color)] hover:opacity-80 hover:bg-[var(--primary-color)]/10 rounded-lg transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +274,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-64 bg-gray-50 dark:bg-gray-900 dark">
+        <main className="flex-1 lg:ml-64 bg-[var(--background)]">
           <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 mt-12 lg:mt-0 min-h-[calc(100vh-3rem)]">
             {children}
           </div>

@@ -86,13 +86,11 @@ export default function RafflePage() {
   };
 
   const handlePaymentComplete = () => {
-    // TODO: Handle successful payment
-    console.log('Payment completed!', {
-      baseTickets: baseTicketCount,
-      multiplier,
-      finalTickets: finalTicketCount,
-      totalAmount: calculateTotalAmount(),
-    });
+    // TODO: Implement payment completion handling
+    // - Process payment transaction
+    // - Create ticket records
+    // - Update user's ticket count
+    // - Show success confirmation
   };
 
   const calculateTotalAmount = () => {

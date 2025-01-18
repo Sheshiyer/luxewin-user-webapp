@@ -2,9 +2,8 @@
 
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { createBrowserClient } from '@supabase/ssr';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase/client';
 
 interface AuthContainerProps {
   view?: 'sign_in' | 'sign_up' | 'forgotten_password';
@@ -13,16 +12,7 @@ interface AuthContainerProps {
 export function AuthContainer({ view = 'sign_in' }: AuthContainerProps) {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirectTo') || '/dashboard';
-  const [origin, setOrigin] = useState('');
-
-  useEffect(() => {
-    setOrigin(window.location.origin);
-  }, []);
-
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
 
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm">

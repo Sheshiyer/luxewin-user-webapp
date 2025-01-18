@@ -1,16 +1,33 @@
-import { createServerClient, type CookieMethodsServer } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { NextResponse, type NextRequest } from 'next/server';
 import { AuthError } from '@supabase/supabase-js';
 
-export async function GET() {
-  const cookieStore = await cookies();
+export async function GET(request: NextRequest) {
+  const response = new NextResponse();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookies: cookieStore as unknown as CookieMethodsServer,
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value;
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          response.cookies.set({
+            name,
+            value,
+            ...options,
+          });
+        },
+        remove(name: string, options: CookieOptions) {
+          response.cookies.set({
+            name,
+            value: '',
+            ...options,
+          });
+        },
+      },
     }
   );
 
@@ -21,14 +38,12 @@ export async function GET() {
     } = await supabase.auth.getSession();
 
     if (error) {
-      console.error('Session error:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ session });
+    return NextResponse.json({ session }, { headers: response.headers });
   } catch (error) {
     const authError = error as AuthError;
-    console.error('Session error:', authError);
     return NextResponse.json({ error: authError.message }, { status: 500 });
   }
 }

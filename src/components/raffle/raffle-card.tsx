@@ -43,11 +43,13 @@ export function RaffleCard({
     raffleId: id,
     onQuizComplete: success => {
       if (success) {
-        // TODO: Handle successful raffle entry
-        console.log('Successfully entered raffle!');
+        // TODO: Implement successful raffle entry
+        // - Show success message
+        // - Navigate to payment flow
       } else {
-        // TODO: Handle failed attempt
-        console.log('Failed quiz attempt');
+        // TODO: Implement failed attempt handling
+        // - Show error message
+        // - Allow retry after timeout
       }
     },
   });

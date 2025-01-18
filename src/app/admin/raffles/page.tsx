@@ -107,17 +107,17 @@ export default function AdminRaffles() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Raffle Management</h1>
+        <h1 className="text-2xl font-semibold text-[var(--foreground)]">Raffle Management</h1>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+          className="px-4 py-2 text-sm bg-[var(--primary-color)] text-[var(--foreground)] rounded-lg hover:opacity-90 transition-colors"
         >
           Create New Raffle
         </button>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+      <div className="flex flex-wrap gap-4 bg-[var(--background-light)] p-4 rounded-xl shadow-sm border border-gray-800">
         <input
           type="text"
           placeholder="Search raffles..."
@@ -126,7 +126,7 @@ export default function AdminRaffles() {
             setSearchQuery(e.target.value);
             setCurrentPage(1); // Reset to first page on search
           }}
-          className="flex-1 min-w-[200px] px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-600"
+          className="flex-1 min-w-[200px] px-4 py-2 bg-[var(--background)] border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] text-[var(--foreground)]"
         />
         <select
           value={statusFilter}
@@ -134,7 +134,7 @@ export default function AdminRaffles() {
             setStatusFilter(e.target.value as typeof statusFilter);
             setCurrentPage(1); // Reset to first page on filter change
           }}
-          className="px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-600"
+          className="px-4 py-2 bg-[var(--background)] border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] text-[var(--foreground)]"
         >
           <option value="all">All Status</option>
           <option value="active">Active</option>
@@ -145,7 +145,7 @@ export default function AdminRaffles() {
         <select
           value={sortBy}
           onChange={e => setSortBy(e.target.value as typeof sortBy)}
-          className="px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-600"
+          className="px-4 py-2 bg-[var(--background)] border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] text-[var(--foreground)]"
         >
           <option value="newest">Newest First</option>
           <option value="oldest">Oldest First</option>
@@ -155,12 +155,12 @@ export default function AdminRaffles() {
       </div>
 
       {/* Raffles Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-[var(--background-light)] rounded-xl shadow-sm border border-gray-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-gray-50 dark:bg-gray-700">
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <tr className="bg-[var(--background)]">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--foreground)]/60 uppercase tracking-wider">
                   Raffle
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -184,10 +184,10 @@ export default function AdminRaffles() {
               {currentRaffles.map(raffle => (
                 <tr key={raffle.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900 dark:text-white">
+                    <div className="text-sm font-medium text-[var(--foreground)]">
                       {raffle.title}
                     </div>
-                    <div className="text-sm text-gray-500">ID: {raffle.id}</div>
+                    <div className="text-sm text-[var(--foreground)]/60">ID: {raffle.id}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
@@ -199,24 +199,24 @@ export default function AdminRaffles() {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900 dark:text-white">
+                    <div className="text-sm text-[var(--foreground)]">
                       {new Date(raffle.startDate).toLocaleDateString()} -{' '}
                       {new Date(raffle.endDate).toLocaleDateString()}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900 dark:text-white">
+                    <div className="text-sm text-[var(--foreground)]">
                       {raffle.ticketsSold} / {raffle.totalTickets}
                     </div>
-                    <div className="w-24 h-2 bg-gray-200 rounded-full mt-1">
+                    <div className="w-24 h-2 bg-[var(--background)] rounded-full mt-1">
                       <div
-                        className="h-full bg-red-500 rounded-full"
+                        className="h-full bg-[var(--primary-color)] rounded-full"
                         style={{ width: `${(raffle.ticketsSold / raffle.totalTickets) * 100}%` }}
                       ></div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900 dark:text-white">
+                    <div className="text-sm text-[var(--foreground)]">
                       ${raffle.price.toFixed(2)}
                     </div>
                   </td>
@@ -226,7 +226,7 @@ export default function AdminRaffles() {
                         setEditingRaffle(raffle);
                         setIsModalOpen(true);
                       }}
-                      className="text-red-500 hover:text-red-600"
+                      className="text-[var(--primary-color)] hover:opacity-80"
                     >
                       Edit
                     </button>
@@ -263,10 +263,10 @@ export default function AdminRaffles() {
           <button
             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
             disabled={currentPage === 1}
-            className={`px-4 py-2 text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors ${
+            className={`px-4 py-2 text-sm bg-[var(--background)] text-[var(--foreground)] rounded-lg border border-gray-800 transition-colors ${
               currentPage === 1
                 ? 'opacity-50 cursor-not-allowed'
-                : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                : 'hover:bg-[var(--background-light)]/50'
             }`}
           >
             Previous
@@ -288,8 +288,8 @@ export default function AdminRaffles() {
                     onClick={() => setCurrentPage(page)}
                     className={`px-4 py-2 text-sm rounded-lg transition-colors ${
                       currentPage === page
-                        ? 'bg-red-500 text-white'
-                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                        ? 'bg-[var(--primary-color)] text-[var(--foreground)]'
+                        : 'bg-[var(--background)] text-[var(--foreground)] border border-gray-800 hover:bg-[var(--background-light)]/50'
                     }`}
                   >
                     {page}
@@ -301,10 +301,10 @@ export default function AdminRaffles() {
           <button
             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 text-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors ${
+            className={`px-4 py-2 text-sm bg-[var(--background)] text-[var(--foreground)] rounded-lg border border-gray-800 transition-colors ${
               currentPage === totalPages
                 ? 'opacity-50 cursor-not-allowed'
-                : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                : 'hover:bg-[var(--background-light)]/50'
             }`}
           >
             Next

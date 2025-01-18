@@ -23,6 +23,7 @@ export default function ProfilePage() {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<ProfileFormData>({
     displayName: user?.user_metadata?.full_name || '',
     bio: user?.user_metadata?.bio || '',
@@ -41,21 +42,25 @@ export default function ProfilePage() {
   const handleAvatarUpload = async (file: File) => {
     try {
       // TODO: Implement avatar upload to storage
-      console.log('Uploading avatar:', file);
-    } catch (error) {
-      console.error('Error uploading avatar:', error);
+      // - Upload file to Supabase storage
+      // - Update user metadata with new avatar URL
+      await Promise.resolve(file); // Placeholder to use file parameter
+    } catch {
+      setError('Failed to upload avatar');
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
+    setError(null);
     try {
       // TODO: Update user profile in Supabase
-      console.log('Saving profile:', formData);
+      // - Update user metadata with form data
+      // - Handle phone number update if changed
       setIsEditing(false);
-    } catch (error) {
-      console.error('Error saving profile:', error);
+    } catch {
+      setError('Failed to save profile');
     } finally {
       setIsSaving(false);
     }
@@ -210,6 +215,9 @@ export default function ProfilePage() {
                 placeholder="+1 (555) 000-0000"
               />
             </div>
+
+            {/* Error Message */}
+            {error && <div className="text-red-500 text-sm text-center">{error}</div>}
 
             {/* Save Button */}
             {isEditing && (

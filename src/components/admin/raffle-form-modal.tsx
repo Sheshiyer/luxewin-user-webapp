@@ -77,13 +77,13 @@ export default function RaffleFormModal({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <div
-          className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"
+          className="fixed inset-0 transition-opacity bg-black/50 backdrop-blur-sm"
           onClick={onClose}
         />
 
-        <div className="inline-block w-full max-w-3xl my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-800 rounded-xl shadow-xl">
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <div className="inline-block w-full max-w-3xl my-8 overflow-hidden text-left align-middle transition-all transform bg-[var(--background)] rounded-xl shadow-xl">
+          <div className="px-6 py-4 border-b border-gray-800">
+            <h3 className="text-lg font-medium text-[var(--foreground)]">
               {initialData ? 'Edit Raffle' : 'Create New Raffle'}
             </h3>
           </div>
@@ -96,8 +96,8 @@ export default function RaffleFormModal({
                 onClick={() => setCurrentTab('basic')}
                 className={`px-4 py-2 text-sm font-medium ${
                   currentTab === 'basic'
-                    ? 'border-b-2 border-red-500 text-red-500'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+                    ? 'border-b-2 border-[var(--primary-color)] text-[var(--primary-color)]'
+                    : 'text-[var(--foreground)]/60 hover:text-[var(--foreground)]'
                 }`}
               >
                 Basic Info
@@ -107,8 +107,8 @@ export default function RaffleFormModal({
                 onClick={() => setCurrentTab('specs')}
                 className={`px-4 py-2 text-sm font-medium ${
                   currentTab === 'specs'
-                    ? 'border-b-2 border-red-500 text-red-500'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+                    ? 'border-b-2 border-[var(--primary-color)] text-[var(--primary-color)]'
+                    : 'text-[var(--foreground)]/60 hover:text-[var(--foreground)]'
                 }`}
               >
                 Specifications
@@ -118,8 +118,8 @@ export default function RaffleFormModal({
                 onClick={() => setCurrentTab('images')}
                 className={`px-4 py-2 text-sm font-medium ${
                   currentTab === 'images'
-                    ? 'border-b-2 border-red-500 text-red-500'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+                    ? 'border-b-2 border-[var(--primary-color)] text-[var(--primary-color)]'
+                    : 'text-[var(--foreground)]/60 hover:text-[var(--foreground)]'
                 }`}
               >
                 Images
@@ -131,19 +131,19 @@ export default function RaffleFormModal({
               {currentTab === 'basic' && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-[var(--foreground)]">
                       Title
                     </label>
                     <input
                       type="text"
                       value={formData.title}
                       onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                      className="w-full px-4 py-2 mt-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-full px-4 py-2 mt-1 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-[var(--foreground)]">
                       Description
                     </label>
                     <textarea
@@ -152,13 +152,13 @@ export default function RaffleFormModal({
                         setFormData(prev => ({ ...prev, description: e.target.value }))
                       }
                       rows={4}
-                      className="w-full px-4 py-2 mt-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-full px-4 py-2 mt-1 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                       required
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label className="block text-sm font-medium text-[var(--foreground)]">
                         Start Date
                       </label>
                       <input
@@ -167,26 +167,26 @@ export default function RaffleFormModal({
                         onChange={e =>
                           setFormData(prev => ({ ...prev, startDate: e.target.value }))
                         }
-                        className="w-full px-4 py-2 mt-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-4 py-2 mt-1 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label className="block text-sm font-medium text-[var(--foreground)]">
                         End Date
                       </label>
                       <input
                         type="date"
                         value={formData.endDate}
                         onChange={e => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
-                        className="w-full px-4 py-2 mt-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-4 py-2 mt-1 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                         required
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label className="block text-sm font-medium text-[var(--foreground)]">
                         Total Tickets
                       </label>
                       <input
@@ -196,12 +196,12 @@ export default function RaffleFormModal({
                           setFormData(prev => ({ ...prev, totalTickets: parseInt(e.target.value) }))
                         }
                         min="1"
-                        className="w-full px-4 py-2 mt-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-4 py-2 mt-1 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label className="block text-sm font-medium text-[var(--foreground)]">
                         Price per Ticket
                       </label>
                       <input
@@ -212,7 +212,7 @@ export default function RaffleFormModal({
                         }
                         min="0.01"
                         step="0.01"
-                        className="w-full px-4 py-2 mt-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-4 py-2 mt-1 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                         required
                       />
                     </div>
@@ -230,19 +230,19 @@ export default function RaffleFormModal({
                         value={spec.key}
                         onChange={e => updateSpecification(index, 'key', e.target.value)}
                         placeholder="Key"
-                        className="flex-1 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="flex-1 px-4 py-2 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                       />
                       <input
                         type="text"
                         value={spec.value}
                         onChange={e => updateSpecification(index, 'value', e.target.value)}
                         placeholder="Value"
-                        className="flex-1 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:border-gray-600"
+                        className="flex-1 px-4 py-2 text-sm border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] bg-[var(--background)] text-[var(--foreground)]"
                       />
                       <button
                         type="button"
                         onClick={() => removeSpecification(index)}
-                        className="p-2 text-red-500 hover:text-red-600"
+                        className="p-2 text-[var(--primary-color)] hover:opacity-80"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +264,7 @@ export default function RaffleFormModal({
                   <button
                     type="button"
                     onClick={addSpecification}
-                    className="flex items-center px-4 py-2 text-sm text-red-500 border border-red-500 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/10"
+                    className="flex items-center px-4 py-2 text-sm text-[var(--primary-color)] border border-[var(--primary-color)] rounded-lg hover:bg-[var(--primary-color)]/10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -292,7 +292,7 @@ export default function RaffleFormModal({
                     {formData.images.map((image, index) => (
                       <div
                         key={index}
-                        className="relative aspect-video bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden"
+                        className="relative aspect-video bg-[var(--background-light)] rounded-lg overflow-hidden"
                       >
                         <Image
                           src={image}
@@ -309,7 +309,7 @@ export default function RaffleFormModal({
                               images: prev.images.filter((_, i) => i !== index),
                             }))
                           }
-                          className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                          className="absolute top-2 right-2 p-1 bg-[var(--primary-color)] text-[var(--foreground)] rounded-full hover:opacity-80"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -330,7 +330,7 @@ export default function RaffleFormModal({
                     ))}
                   </div>
                   <div className="flex items-center justify-center w-full">
-                    <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                    <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-[var(--background-light)]/50">
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -338,7 +338,7 @@ export default function RaffleFormModal({
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                          className="w-8 h-8 mb-4 text-[var(--foreground)]/60"
                         >
                           <path
                             strokeLinecap="round"
@@ -346,10 +346,10 @@ export default function RaffleFormModal({
                             d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
                           />
                         </svg>
-                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <p className="mb-2 text-sm text-[var(--foreground)]/60">
                           <span className="font-semibold">Click to upload</span> or drag and drop
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                        <p className="text-xs text-[var(--foreground)]/60">
                           PNG, JPG or WEBP (MAX. 800x400px)
                         </p>
                       </div>
@@ -360,18 +360,18 @@ export default function RaffleFormModal({
               )}
             </div>
 
-            <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-6 py-4 border-t border-gray-800">
               <div className="flex justify-end space-x-4">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700"
+                  className="px-4 py-2 text-sm text-[var(--foreground)] bg-[var(--background)] border border-gray-800 rounded-lg hover:bg-[var(--background-light)]/50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm text-white bg-red-500 rounded-lg hover:bg-red-600"
+                  className="px-4 py-2 text-sm text-[var(--foreground)] bg-[var(--primary-color)] rounded-lg hover:opacity-90"
                 >
                   {initialData ? 'Save Changes' : 'Create Raffle'}
                 </button>

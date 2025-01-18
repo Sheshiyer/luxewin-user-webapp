@@ -129,7 +129,9 @@ export default function TicketsPage() {
               <div
                 key={ticket.id}
                 className="grid grid-cols-7 gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer group"
-                onClick={() => console.log('View ticket details:', ticket.id)}
+                onClick={() => {
+                  // TODO: Implement ticket details view
+                }}
               >
                 <div className="col-span-2">
                   <div className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-[var(--primary-color)] transition-colors">

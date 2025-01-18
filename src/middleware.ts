@@ -1,14 +1,31 @@
-import { createServerClient, type CookieMethodsServer } from '@supabase/ssr';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookies: request.cookies as unknown as CookieMethodsServer,
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value;
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          response.cookies.set({
+            name,
+            value,
+            ...options,
+          });
+        },
+        remove(name: string, options: CookieOptions) {
+          response.cookies.set({
+            name,
+            value: '',
+            ...options,
+          });
+        },
+      },
     }
   );
 
@@ -19,24 +36,12 @@ export async function middleware(request: NextRequest) {
       error: userError,
     } = await supabase.auth.getUser();
 
-    console.log('Middleware check:', {
-      pathname,
-      userEmail: user?.email,
-      hasError: !!userError,
-    });
-
     // Handle admin routes
     if (pathname.startsWith('/admin')) {
-      console.log('Admin route check:', {
-        isLoginPage: pathname === '/admin/login',
-        isAdminEmail: user?.email === 'mrhigh3r@gmail.com',
-      });
-
       // Allow access to login page without auth
       if (pathname === '/admin/login') {
         // If already logged in as admin, redirect to admin dashboard
         if (user?.email === 'mrhigh3r@gmail.com') {
-          console.log('Admin already logged in, redirecting to dashboard');
           return NextResponse.redirect(new URL('/admin', request.url));
         }
         return response;
@@ -44,19 +49,14 @@ export async function middleware(request: NextRequest) {
 
       // For non-login admin routes
       if (!user || userError) {
-        console.log('No user or error, redirecting to login');
         return NextResponse.redirect(new URL('/admin/login', request.url));
       }
 
-      console.log('User exists, checking admin status');
-
       // Allow access only for admin email
       if (user.email === 'mrhigh3r@gmail.com') {
-        console.log('Admin access granted');
         return response;
       }
 
-      console.log('Non-admin user, redirecting to dashboard');
       return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
@@ -73,13 +73,18 @@ export async function middleware(request: NextRequest) {
     if (pathname.startsWith('/auth/')) {
       if (user && !userError) {
         const redirectTo = request.nextUrl.searchParams.get('redirectTo') || '/dashboard';
-        return NextResponse.redirect(new URL(redirectTo, request.url));
+        const redirectUrl = new URL(redirectTo, request.url);
+        // Ensure the redirect URL is absolute
+        if (!redirectUrl.origin) {
+          redirectUrl.protocol = request.nextUrl.protocol;
+          redirectUrl.host = request.nextUrl.host;
+        }
+        return NextResponse.redirect(redirectUrl);
       }
     }
 
     return response;
-  } catch (error) {
-    console.error('Auth middleware error:', error);
+  } catch {
     return response;
   }
 }

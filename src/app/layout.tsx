@@ -27,10 +27,10 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={`min-h-screen bg-background font-sans antialiased ${fontSans.variable} ${fontHeading.variable} dark:bg-gray-900`}
+        className={`min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white font-sans antialiased ${fontSans.variable} ${fontHeading.variable}`}
       >
         <AuthProvider>{children}</AuthProvider>
       </body>
