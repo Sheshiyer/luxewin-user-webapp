@@ -74,64 +74,9 @@ export default function AdminLoginPage() {
         });
 
         if (verifiedUser) {
-          console.log('Starting admin role setup');
-          try {
-            // Update user metadata with admin role
-            console.log('Updating user metadata with admin role...');
-            const { data: updatedUser, error: updateError } = await supabase.auth.updateUser({
-              data: { roles: ['admin'] },
-            });
-            if (updateError) {
-              console.error('Update user error:', updateError);
-              throw updateError;
-            }
-            console.log('User metadata updated:', updatedUser?.user?.user_metadata);
-
-            // Check if profile exists
-            console.log('Checking for existing profile...');
-            const { data: existingProfile, error: profileCheckError } = await supabase
-              .from('profiles')
-              .select('id, role')
-              .eq('id', verifiedUser.id)
-              .single();
-
-            if (profileCheckError && profileCheckError.code !== 'PGRST116') {
-              console.error('Profile check error:', profileCheckError);
-              throw profileCheckError;
-            }
-            console.log('Profile check result:', existingProfile);
-
-            // Update or insert admin role in profiles table
-            console.log('Updating profile with admin role...');
-            const { data: updatedProfile, error: profileError } = await supabase
-              .from('profiles')
-              .upsert(
-                {
-                  id: verifiedUser.id,
-                  role: 'admin',
-                  updated_at: new Date().toISOString(),
-                  // Include created_at only for new profiles
-                  ...(existingProfile ? {} : { created_at: new Date().toISOString() }),
-                },
-                {
-                  onConflict: 'id',
-                  ignoreDuplicates: false,
-                }
-              );
-            if (profileError) {
-              console.error('Profile update error:', profileError);
-              throw profileError;
-            }
-            console.log('Profile updated:', updatedProfile);
-
-            console.log('Admin setup complete, redirecting to dashboard');
-            await router.push('/admin');
-          } catch (error) {
-            // If role update fails, sign out and show error
-            console.error('Admin role setup failed:', error);
-            await supabase.auth.signOut();
-            throw error;
-          }
+          // Since we've already verified this is the admin email, we can proceed directly
+          console.log('Admin verified, redirecting to dashboard');
+          await router.push('/admin');
         }
       } else {
         console.log('Email does not match admin email:', {
