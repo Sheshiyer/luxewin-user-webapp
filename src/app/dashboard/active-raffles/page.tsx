@@ -89,8 +89,8 @@ export default function ActiveRaffles() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Active Raffles</h1>
-          <p className="mt-1 text-sm text-gray-400">
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Active Raffles</h1>
+          <p className="mt-1 text-xs sm:text-sm text-gray-400">
             Enter now for a chance to win these exclusive prizes
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function ActiveRaffles() {
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value as 'endDate' | 'price' | 'popularity')}
-            className="input-field max-w-[200px]"
+            className="input-field max-w-[200px] text-xs sm:text-sm"
           >
             <option value="endDate">Ending Soon</option>
             <option value="price">Lowest Price</option>
@@ -108,14 +108,14 @@ export default function ActiveRaffles() {
       </div>
 
       {/* Category Tabs */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
-        <nav className="-mb-px flex space-x-8 overflow-x-auto">
+      <div className="border-b border-gray-200 dark:border-gray-700 -mx-4 sm:mx-0">
+        <nav className="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto px-4 sm:px-0">
           {CATEGORIES.map(category => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
               className={`
-                whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
+                whitespace-nowrap py-2 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm
                 ${
                   selectedCategory === category.id
                     ? 'border-[var(--primary-color)] text-[var(--primary-color)]'
@@ -134,57 +134,68 @@ export default function ActiveRaffles() {
         </nav>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {filteredRaffles.map(raffle => (
           <div key={raffle.id} className="card-interactive group">
-            <div className="aspect-w-16 aspect-h-9 relative">
-              <Image src={raffle.image} alt={raffle.name} fill className="object-cover" />
-              <div className="absolute top-4 right-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-black/50 text-[#3399FF] backdrop-blur-sm">
+            <div className="relative w-full pt-[56.25%]">
+              <Image
+                src={raffle.image}
+                alt={raffle.name}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                priority={filteredRaffles.indexOf(raffle) <= 1}
+              />
+              <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
+                <span className="inline-flex items-center px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-black/50 text-[#3399FF] backdrop-blur-sm">
                   Value: {raffle.value}
                 </span>
               </div>
             </div>
-            <div className="p-6">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#3399FF] transition-colors">
+            <div className="p-3 sm:p-4">
+              <h3 className="text-sm sm:text-base font-semibold text-white mb-1.5 group-hover:text-[#3399FF] transition-colors">
                 {raffle.name}
               </h3>
-              <p className="text-sm text-gray-400 mb-4">{raffle.description}</p>
-              <div className="space-y-4">
+              <p className="text-xs text-gray-400 mb-2 sm:mb-3 line-clamp-2">
+                {raffle.description}
+              </p>
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="flex justify-between text-[10px] sm:text-xs mb-1">
                     <span className="text-gray-400">Tickets Available</span>
-                    <span className="text-white font-medium">
+                    <span className="text-white font-medium tabular-nums">
                       {raffle.soldTickets}/{raffle.totalTickets}
                     </span>
                   </div>
-                  <div className="w-full bg-[#1A1A1A] rounded-full h-2">
+                  <div className="w-full bg-[#1A1A1A] rounded-full h-1.5 sm:h-2">
                     <div
-                      className="bg-[#3399FF] h-2 rounded-full transition-all duration-500"
+                      className="bg-[#3399FF] h-1.5 sm:h-2 rounded-full transition-all duration-500"
                       style={{ width: `${(raffle.soldTickets / raffle.totalTickets) * 100}%` }}
                     />
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400">Price per ticket</p>
-                    <p className="text-lg font-semibold text-[#3399FF]">${raffle.price}</p>
+                    <p className="text-[10px] sm:text-xs text-gray-400">Price per ticket</p>
+                    <p className="text-sm sm:text-base font-semibold text-[#3399FF] tabular-nums">
+                      ${raffle.price}
+                    </p>
                   </div>
                   <Link
                     href={`/raffle/${raffle.id}`}
-                    className="px-4 py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity"
+                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white text-xs sm:text-sm rounded-lg hover:opacity-90 transition-opacity"
                     prefetch={false}
                   >
                     Enter Raffle
                   </Link>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400">
+                <div className="flex items-center justify-between text-[10px] sm:text-xs">
+                  <span className="text-gray-400 tabular-nums">
                     Ends {new Date(raffle.endDate).toLocaleDateString()}
                   </span>
                   <span
                     className={`
-                    px-2 py-1 rounded-full text-xs font-medium
+                    px-2 py-0.5 sm:py-1 rounded-full font-medium shrink-0
                     ${
                       raffle.soldTickets / raffle.totalTickets > 0.8
                         ? 'bg-red-900/30 text-red-400'
@@ -204,14 +215,14 @@ export default function ActiveRaffles() {
       </div>
 
       {filteredRaffles.length === 0 && (
-        <div className="card p-12 text-center">
+        <div className="card p-8 sm:p-12 text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="mx-auto h-12 w-12 text-gray-400"
+            className="mx-auto h-8 w-8 sm:h-12 sm:w-12 text-gray-400"
           >
             <path
               strokeLinecap="round"
@@ -222,7 +233,7 @@ export default function ActiveRaffles() {
           <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
             No active raffles
           </h3>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             {selectedCategory === 'all'
               ? 'Check back soon for new raffles!'
               : `No ${selectedCategory} raffles available. Try a different category.`}

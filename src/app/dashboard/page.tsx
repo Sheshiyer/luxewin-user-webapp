@@ -9,10 +9,10 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
-        <div className="flex items-center justify-between">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
               Welcome back, {user?.email?.split('@')[0]}!
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
@@ -26,14 +26,18 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Active Tickets</p>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">12</h3>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">
+                Active Tickets
+              </p>
+              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                12
+              </h3>
             </div>
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -50,23 +54,27 @@ export default function DashboardPage() {
               </svg>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-3 sm:mt-4">
             <Link
               href="/dashboard/tickets"
-              className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
+              className="text-xs sm:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
             >
               View all tickets →
             </Link>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Spent</p>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">$249.99</h3>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">
+                Total Spent
+              </p>
+              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                $249.99
+              </h3>
             </div>
-            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -83,25 +91,27 @@ export default function DashboardPage() {
               </svg>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-3 sm:mt-4">
             <Link
               href="/dashboard/transactions"
-              className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
+              className="text-xs sm:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
             >
               View transactions →
             </Link>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">
                 Raffles Entered
               </p>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">8</h3>
+              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                8
+              </h3>
             </div>
-            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -118,23 +128,27 @@ export default function DashboardPage() {
               </svg>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-3 sm:mt-4">
             <Link
               href="/dashboard/active-raffles"
-              className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
+              className="text-xs sm:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
             >
               View active raffles →
             </Link>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Prizes Won</p>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">1</h3>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">
+                Prizes Won
+              </p>
+              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mt-1">
+                1
+              </h3>
             </div>
-            <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -151,8 +165,8 @@ export default function DashboardPage() {
               </svg>
             </div>
           </div>
-          <div className="mt-4">
-            <span className="text-sm text-gray-500 dark:text-gray-400">
+          <div className="mt-3 sm:mt-4">
+            <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
               Last won: Gaming Setup Bundle
             </span>
           </div>
@@ -161,9 +175,11 @@ export default function DashboardPage() {
 
       {/* Recent Activity */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+              Recent Activity
+            </h2>
             <Link
               href="/dashboard/transactions"
               className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
@@ -172,9 +188,9 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+            <div className="flex items-center justify-between py-2 sm:py-3 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -191,10 +207,10 @@ export default function DashboardPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
                     Purchased 2 tickets
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
                     Luxury Watch Collection Raffle
                   </p>
                 </div>
@@ -202,9 +218,9 @@ export default function DashboardPage() {
               <span className="text-sm text-gray-500 dark:text-gray-400">2 hours ago</span>
             </div>
 
-            <div className="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+            <div className="flex items-center justify-between py-2 sm:py-3 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -221,11 +237,15 @@ export default function DashboardPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">Won Prize!</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Gaming Setup Bundle</p>
+                  <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">
+                    Won Prize!
+                  </p>
+                  <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
+                    Gaming Setup Bundle
+                  </p>
                 </div>
               </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">1 day ago</span>
+              <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">1 day ago</span>
             </div>
           </div>
         </div>

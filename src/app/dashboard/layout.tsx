@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/auth-context';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const DASHBOARD_MENU = [
   {
@@ -133,6 +133,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -147,8 +148,45 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <>
       <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#0A0A0A] text-white hover:bg-gray-800 transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <div className="w-5 h-5 flex flex-col justify-center space-y-1.5">
+            <span
+              className={`block h-0.5 w-5 bg-current transform transition-transform ${
+                isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-current transform transition-opacity ${
+                isMobileMenuOpen ? 'opacity-0' : ''
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-5 bg-current transform transition-transform ${
+                isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+              }`}
+            />
+          </div>
+        </button>
+
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+            isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+
         {/* Sidebar */}
-        <aside className="fixed inset-y-0 left-0 w-64 bg-[#0A0A0A] border-r border-gray-800">
+        <aside
+          className={`fixed inset-y-0 left-0 w-[280px] lg:w-64 bg-[#0A0A0A] border-r border-gray-800 transform transition-transform duration-300 lg:translate-x-0 ${
+            isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
           <div className="flex flex-col h-full">
             {/* User Info */}
             <Link
@@ -169,15 +207,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     </p>
                   </div>
                 </div>
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    signOut();
-                  }}
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  Sign Out
-                </button>
               </div>
             </Link>
 
@@ -198,12 +227,38 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </Link>
               ))}
             </nav>
+
+            {/* Sign Out Button */}
+            <div className="p-4 border-t border-gray-800">
+              <button
+                onClick={() => signOut()}
+                className="flex items-center justify-center w-full space-x-2 px-4 py-2 text-sm text-red-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                  />
+                </svg>
+                <span>Sign Out</span>
+              </button>
+            </div>
           </div>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 ml-64">
-          <div className="container mx-auto px-6 py-8">{children}</div>
+        <main className="flex-1 lg:ml-64">
+          <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 mt-12 lg:mt-0">
+            {children}
+          </div>
         </main>
       </div>
     </>

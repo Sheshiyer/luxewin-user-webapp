@@ -44,10 +44,10 @@ export function QuizModal({ isOpen, onClose, onSuccess, onFailure, question }: Q
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-[calc(100%-2rem)] sm:w-full mx-4 overflow-hidden">
         {/* Header */}
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
             Complete Challenge to Enter Raffle
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -56,15 +56,15 @@ export function QuizModal({ isOpen, onClose, onSuccess, onFailure, question }: Q
         </div>
 
         {/* Question */}
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           {question.imageUrl && (
-            <div className="relative w-full h-48 rounded-lg overflow-hidden">
+            <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden">
               <Image src={question.imageUrl} alt="Quiz question" fill className="object-cover" />
             </div>
           )}
 
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-white">
               {question.question}
             </h3>
 
@@ -75,7 +75,7 @@ export function QuizModal({ isOpen, onClose, onSuccess, onFailure, question }: Q
                   onClick={() => !hasSubmitted && setSelectedAnswer(option)}
                   disabled={hasSubmitted}
                   className={`
-                    w-full p-4 text-left rounded-lg border-2 transition-all
+                    w-full p-3 sm:p-4 text-left rounded-lg border-2 transition-all
                     ${
                       hasSubmitted && option === question.correctAnswer
                         ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
@@ -110,10 +110,10 @@ export function QuizModal({ isOpen, onClose, onSuccess, onFailure, question }: Q
         </div>
 
         {/* Footer */}
-        <div className="p-6 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+        <div className="p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between sm:items-center">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+            className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white order-2 sm:order-1"
           >
             Cancel Entry
           </button>
@@ -121,7 +121,7 @@ export function QuizModal({ isOpen, onClose, onSuccess, onFailure, question }: Q
             onClick={handleSubmit}
             disabled={!selectedAnswer || hasSubmitted}
             className={`
-              px-6 py-2 rounded-lg text-sm font-medium transition-all
+              w-full sm:w-auto px-4 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all order-1 sm:order-2
               ${
                 !selectedAnswer || hasSubmitted
                   ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
