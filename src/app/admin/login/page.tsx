@@ -20,17 +20,15 @@ export default function AdminLoginPage() {
   const { user, isAdmin } = useAuth();
 
   useEffect(() => {
-    if (user && isAdmin) {
+    console.log('Admin login page mounted:', { user, isAdmin, loading });
+    if (!loading && user && isAdmin) {
       router.push('/admin');
     }
-  }, [user, isAdmin, router]);
-
-  useEffect(() => {
-    console.log('Admin login page mounted:', { user, isAdmin });
-  }, [user, isAdmin]);
+  }, [user, isAdmin, loading, router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     setError('');
 

@@ -1,0 +1,979 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "LuxeWin", "version": "0.1.0" },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": ["authentication"],
+        "summary": "Login",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": { "$ref": "#/components/schemas/Body_login_api_v1_auth_login_post" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Token" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": ["authentication"],
+        "summary": "Register",
+        "operationId": "register_api_v1_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UserCreate" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/raffles/": {
+      "post": {
+        "tags": ["raffles"],
+        "summary": "Create Raffle",
+        "description": "Create new raffle.\nOnly superusers can create raffles.",
+        "operationId": "create_raffle_api_v1_raffles__post",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/RaffleCreate" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Raffle" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["raffles"],
+        "summary": "List Raffles",
+        "description": "List all raffles.\nOptionally filter by active status.",
+        "operationId": "list_raffles_api_v1_raffles__get",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Skip" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 100, "title": "Limit" }
+          },
+          {
+            "name": "active_only",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean", "default": false, "title": "Active Only" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Raffle" },
+                  "title": "Response List Raffles Api V1 Raffles  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/raffles/{raffle_id}": {
+      "get": {
+        "tags": ["raffles"],
+        "summary": "Get Raffle",
+        "description": "Get raffle by ID.",
+        "operationId": "get_raffle_api_v1_raffles__raffle_id__get",
+        "parameters": [
+          {
+            "name": "raffle_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Raffle Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Raffle" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["raffles"],
+        "summary": "Update Raffle",
+        "description": "Update raffle.\nOnly superusers can update raffles.",
+        "operationId": "update_raffle_api_v1_raffles__raffle_id__put",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "raffle_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Raffle Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/RaffleUpdate" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Raffle" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/raffles/{raffle_id}/select-winner": {
+      "post": {
+        "tags": ["raffles"],
+        "summary": "Select Raffle Winner",
+        "description": "Select a winner for the raffle.\nOnly superusers can select winners.",
+        "operationId": "select_raffle_winner_api_v1_raffles__raffle_id__select_winner_post",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "raffle_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Raffle Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Raffle" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/purchases/": {
+      "post": {
+        "tags": ["purchases"],
+        "summary": "Create Purchase",
+        "description": "Create a new purchase (buy raffle tickets).\nValidates:\n- Raffle exists and is active\n- Enough tickets are available\n- Total amount matches ticket price * quantity\n- Payment is confirmed",
+        "operationId": "create_purchase_api_v1_purchases__post",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PurchaseCreate" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Purchase" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["purchases"],
+        "summary": "List User Purchases",
+        "description": "List all purchases for the current user.",
+        "operationId": "list_user_purchases_api_v1_purchases__get",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Skip" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 100, "title": "Limit" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Purchase" },
+                  "title": "Response List User Purchases Api V1 Purchases  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/purchases/{purchase_id}": {
+      "get": {
+        "tags": ["purchases"],
+        "summary": "Get Purchase",
+        "description": "Get a specific purchase by ID.\nOnly returns the purchase if it belongs to the current user.",
+        "operationId": "get_purchase_api_v1_purchases__purchase_id__get",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "purchase_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Purchase Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Purchase" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/purchases/raffle/{raffle_id}": {
+      "get": {
+        "tags": ["purchases"],
+        "summary": "List Raffle Purchases",
+        "description": "List all purchases for a specific raffle.\nOnly returns the current user's purchases for that raffle.",
+        "operationId": "list_raffle_purchases_api_v1_purchases_raffle__raffle_id__get",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "raffle_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Raffle Id" }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Skip" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 100, "title": "Limit" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Purchase" },
+                  "title": "Response List Raffle Purchases Api V1 Purchases Raffle  Raffle Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile/me": {
+      "get": {
+        "tags": ["profile"],
+        "summary": "Get Profile",
+        "description": "Get current user's profile.",
+        "operationId": "get_profile_api_v1_profile_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Profile Api V1 Profile Me Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      },
+      "put": {
+        "tags": ["profile"],
+        "summary": "Update Profile",
+        "description": "Update current user's profile.",
+        "operationId": "update_profile_api_v1_profile_me_put",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UserUpdate" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Update Profile Api V1 Profile Me Put"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/api/v1/profile/me/stats": {
+      "get": {
+        "tags": ["profile"],
+        "summary": "Get Profile Stats",
+        "description": "Get current user's raffle participation statistics.\nReturns:\n- Total tickets purchased\n- Total amount spent\n- Number of raffles participated in\n- Number of raffles won",
+        "operationId": "get_profile_stats_api_v1_profile_me_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Profile Stats Api V1 Profile Me Stats Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/api/v1/profile/me/raffles": {
+      "get": {
+        "tags": ["profile"],
+        "summary": "Get User Raffles",
+        "description": "Get list of raffles the user has participated in,\nincluding number of tickets purchased for each raffle.",
+        "operationId": "get_user_raffles_api_v1_profile_me_raffles_get",
+        "security": [{ "OAuth2PasswordBearer": [] }],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 0, "title": "Skip" }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 100, "title": "Limit" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get User Raffles Api V1 Profile Me Raffles Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/payments/create-intent": {
+      "post": {
+        "tags": ["payments"],
+        "summary": "Create Payment Intent",
+        "description": "Create a payment intent for purchasing raffle tickets.",
+        "operationId": "create_payment_intent_api_v1_payments_create_intent_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PaymentIntentCreate" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaymentIntentResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/api/v1/payments/confirm": {
+      "post": {
+        "tags": ["payments"],
+        "summary": "Confirm Payment",
+        "description": "Confirm a payment was successful.",
+        "operationId": "confirm_payment_api_v1_payments_confirm_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PaymentConfirmation" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": { "type": "boolean" },
+                  "type": "object",
+                  "title": "Response Confirm Payment Api V1 Payments Confirm Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/api/v1/payments/refund": {
+      "post": {
+        "tags": ["payments"],
+        "summary": "Refund Payment",
+        "description": "Refund a payment.\nOnly available to superusers.",
+        "operationId": "refund_payment_api_v1_payments_refund_post",
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/PaymentRefund" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaymentRefundResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "OAuth2PasswordBearer": [] }]
+      }
+    },
+    "/api/v1/payments/webhook": {
+      "post": {
+        "tags": ["payments"],
+        "summary": "Stripe Webhook",
+        "description": "Handle Stripe webhook events.",
+        "operationId": "stripe_webhook_api_v1_payments_webhook_post",
+        "parameters": [
+          {
+            "name": "stripe-signature",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Stripe-Signature" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/WebhookEvent" } }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_login_api_v1_auth_login_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [{ "type": "string", "pattern": "password" }, { "type": "null" }],
+            "title": "Grant Type"
+          },
+          "username": { "type": "string", "title": "Username" },
+          "password": { "type": "string", "title": "Password" },
+          "scope": { "type": "string", "title": "Scope", "default": "" },
+          "client_id": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": ["username", "password"],
+        "title": "Body_login_api_v1_auth_login_post"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PaymentConfirmation": {
+        "properties": { "payment_intent_id": { "type": "string", "title": "Payment Intent Id" } },
+        "type": "object",
+        "required": ["payment_intent_id"],
+        "title": "PaymentConfirmation"
+      },
+      "PaymentIntentCreate": {
+        "properties": {
+          "raffle_id": { "type": "integer", "title": "Raffle Id" },
+          "quantity": { "type": "integer", "title": "Quantity" }
+        },
+        "type": "object",
+        "required": ["raffle_id", "quantity"],
+        "title": "PaymentIntentCreate"
+      },
+      "PaymentIntentResponse": {
+        "properties": {
+          "client_secret": { "type": "string", "title": "Client Secret" },
+          "payment_intent_id": { "type": "string", "title": "Payment Intent Id" },
+          "amount": { "type": "number", "title": "Amount" },
+          "currency": { "type": "string", "title": "Currency" }
+        },
+        "type": "object",
+        "required": ["client_secret", "payment_intent_id", "amount", "currency"],
+        "title": "PaymentIntentResponse"
+      },
+      "PaymentRefund": {
+        "properties": {
+          "payment_intent_id": { "type": "string", "title": "Payment Intent Id" },
+          "amount": { "anyOf": [{ "type": "number" }, { "type": "null" }], "title": "Amount" }
+        },
+        "type": "object",
+        "required": ["payment_intent_id"],
+        "title": "PaymentRefund"
+      },
+      "PaymentRefundResponse": {
+        "properties": {
+          "refund_id": { "type": "string", "title": "Refund Id" },
+          "status": { "type": "string", "title": "Status" },
+          "amount": { "type": "number", "title": "Amount" }
+        },
+        "type": "object",
+        "required": ["refund_id", "status", "amount"],
+        "title": "PaymentRefundResponse"
+      },
+      "Purchase": {
+        "properties": {
+          "raffle_id": { "type": "integer", "title": "Raffle Id" },
+          "quantity": { "type": "integer", "title": "Quantity" },
+          "total_amount": { "type": "string", "title": "Total Amount" },
+          "payment_intent_id": { "type": "string", "title": "Payment Intent Id" },
+          "id": { "type": "integer", "title": "Id" },
+          "user_id": { "type": "integer", "title": "User Id" },
+          "purchase_date": { "type": "string", "format": "date-time", "title": "Purchase Date" }
+        },
+        "type": "object",
+        "required": [
+          "raffle_id",
+          "quantity",
+          "total_amount",
+          "payment_intent_id",
+          "id",
+          "user_id",
+          "purchase_date"
+        ],
+        "title": "Purchase"
+      },
+      "PurchaseCreate": {
+        "properties": {
+          "raffle_id": { "type": "integer", "title": "Raffle Id" },
+          "quantity": { "type": "integer", "title": "Quantity" },
+          "total_amount": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }],
+            "title": "Total Amount"
+          },
+          "payment_intent_id": { "type": "string", "title": "Payment Intent Id" }
+        },
+        "type": "object",
+        "required": ["raffle_id", "quantity", "total_amount", "payment_intent_id"],
+        "title": "PurchaseCreate"
+      },
+      "Raffle": {
+        "properties": {
+          "title": { "type": "string", "title": "Title" },
+          "description": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Description"
+          },
+          "ticket_price": { "type": "string", "title": "Ticket Price" },
+          "total_tickets": { "type": "integer", "title": "Total Tickets" },
+          "end_date": { "type": "string", "format": "date-time", "title": "End Date" },
+          "id": { "type": "integer", "title": "Id" },
+          "tickets_sold": { "type": "integer", "title": "Tickets Sold" },
+          "start_date": { "type": "string", "format": "date-time", "title": "Start Date" },
+          "is_active": { "type": "boolean", "title": "Is Active" },
+          "winner_id": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Winner Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "ticket_price",
+          "total_tickets",
+          "end_date",
+          "id",
+          "tickets_sold",
+          "start_date",
+          "is_active"
+        ],
+        "title": "Raffle"
+      },
+      "RaffleCreate": {
+        "properties": {
+          "title": { "type": "string", "title": "Title" },
+          "description": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Description"
+          },
+          "ticket_price": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }],
+            "title": "Ticket Price"
+          },
+          "total_tickets": { "type": "integer", "title": "Total Tickets" },
+          "end_date": { "type": "string", "format": "date-time", "title": "End Date" }
+        },
+        "type": "object",
+        "required": ["title", "ticket_price", "total_tickets", "end_date"],
+        "title": "RaffleCreate"
+      },
+      "RaffleUpdate": {
+        "properties": {
+          "title": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Title" },
+          "description": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Description"
+          },
+          "ticket_price": {
+            "anyOf": [{ "type": "number" }, { "type": "string" }, { "type": "null" }],
+            "title": "Ticket Price"
+          },
+          "total_tickets": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Total Tickets"
+          },
+          "end_date": {
+            "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+            "title": "End Date"
+          },
+          "is_active": {
+            "anyOf": [{ "type": "boolean" }, { "type": "null" }],
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "title": "RaffleUpdate"
+      },
+      "Token": {
+        "properties": {
+          "access_token": { "type": "string", "title": "Access Token" },
+          "token_type": { "type": "string", "title": "Token Type", "default": "bearer" }
+        },
+        "type": "object",
+        "required": ["access_token"],
+        "title": "Token"
+      },
+      "User": {
+        "properties": {
+          "email": {
+            "anyOf": [{ "type": "string", "format": "email" }, { "type": "null" }],
+            "title": "Email"
+          },
+          "is_active": {
+            "anyOf": [{ "type": "boolean" }, { "type": "null" }],
+            "title": "Is Active",
+            "default": true
+          },
+          "is_superuser": { "type": "boolean", "title": "Is Superuser", "default": false },
+          "full_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Full Name"
+          },
+          "wallet_address": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Wallet Address"
+          },
+          "id": { "type": "integer", "title": "Id" }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "User"
+      },
+      "UserCreate": {
+        "properties": {
+          "email": { "type": "string", "format": "email", "title": "Email" },
+          "is_active": {
+            "anyOf": [{ "type": "boolean" }, { "type": "null" }],
+            "title": "Is Active",
+            "default": true
+          },
+          "is_superuser": { "type": "boolean", "title": "Is Superuser", "default": false },
+          "full_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Full Name"
+          },
+          "wallet_address": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Wallet Address"
+          },
+          "password": { "type": "string", "title": "Password" }
+        },
+        "type": "object",
+        "required": ["email", "password"],
+        "title": "UserCreate"
+      },
+      "UserUpdate": {
+        "properties": {
+          "email": {
+            "anyOf": [{ "type": "string", "format": "email" }, { "type": "null" }],
+            "title": "Email"
+          },
+          "is_active": {
+            "anyOf": [{ "type": "boolean" }, { "type": "null" }],
+            "title": "Is Active",
+            "default": true
+          },
+          "is_superuser": { "type": "boolean", "title": "Is Superuser", "default": false },
+          "full_name": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Full Name"
+          },
+          "wallet_address": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Wallet Address"
+          },
+          "password": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Password" }
+        },
+        "type": "object",
+        "title": "UserUpdate"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "WebhookEvent": {
+        "properties": {
+          "type": { "type": "string", "title": "Type" },
+          "data": { "type": "object", "title": "Data" }
+        },
+        "type": "object",
+        "required": ["type", "data"],
+        "title": "WebhookEvent"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": { "password": { "scopes": {}, "tokenUrl": "/api/v1/auth/login" } }
+      }
+    }
+  }
+}

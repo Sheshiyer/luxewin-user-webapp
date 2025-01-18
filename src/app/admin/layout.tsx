@@ -158,25 +158,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // Admin check
   useEffect(() => {
     console.log('Admin layout auth state:', { user, isAdmin, loading });
-    const checkAuth = async () => {
-      if (!loading) {
-        if (!user) {
-          console.log('No user, redirecting to login');
-          await router.push('/admin/login');
-        } else if (!isAdmin) {
-          console.log('Not admin, redirecting to dashboard');
-          await router.push('/dashboard');
-        } else {
-          console.log('User is authenticated and admin');
-        }
-      }
-    };
-    checkAuth();
+    if (!loading && (!user || !isAdmin)) {
+      const redirectPath = !user ? '/admin/login' : '/dashboard';
+      console.log(`Redirecting to ${redirectPath}`);
+      router.push(redirectPath);
+    }
   }, [user, loading, router, isAdmin]);
 
   // Show loading state
   if (loading) {
-    console.log('Admin layout loading...');
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
@@ -184,9 +174,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  // Don't render anything if not authenticated
+  // Don't render anything if not authenticated or not admin
   if (!user || !isAdmin) {
-    console.log('Admin layout - not authenticated or not admin');
     return null;
   }
 
