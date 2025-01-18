@@ -1,5 +1,5 @@
-import { createClient } from '@supabase/supabase-js'
-import { Database } from '@/types/supabase'
+import { createClient } from '@supabase/supabase-js';
+import { Database } from '@/types/supabase';
 
 // Create a Supabase client for server-side operations
 export const supabaseAdmin = createClient<Database>(
@@ -11,4 +11,4 @@ export const supabaseAdmin = createClient<Database>(
       persistSession: false,
     },
   }
-)
+);

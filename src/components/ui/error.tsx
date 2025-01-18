@@ -1,6 +1,6 @@
 interface ErrorProps {
-  message?: string
-  retry?: () => void
+  message?: string;
+  retry?: () => void;
 }
 
 export function Error({ message = 'Something went wrong', retry }: ErrorProps) {
@@ -24,13 +24,10 @@ export function Error({ message = 'Something went wrong', retry }: ErrorProps) {
       </div>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">{message}</h1>
       {retry && (
-        <button
-          onClick={retry}
-          className="button-primary"
-        >
+        <button onClick={retry} className="button-primary">
           Try Again
         </button>
       )}
     </div>
-  )
+  );
 }

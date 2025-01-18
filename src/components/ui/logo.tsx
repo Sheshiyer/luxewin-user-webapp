@@ -1,5 +1,5 @@
 interface LogoProps {
-  className?: string
+  className?: string;
 }
 
 export function Logo({ className = '' }: LogoProps) {
@@ -9,5 +9,5 @@ export function Logo({ className = '' }: LogoProps) {
         Luxe<span className="text-primary-color">Win</span>
       </span>
     </div>
-  )
+  );
 }
