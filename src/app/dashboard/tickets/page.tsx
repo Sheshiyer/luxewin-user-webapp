@@ -67,12 +67,14 @@ export default function TicketsPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 xs:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 xs:gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">My Tickets</h1>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+          <h1 className="text-xl xs:text-2xl font-bold text-gray-900 dark:text-white">
+            My Tickets
+          </h1>
+          <p className="mt-0.5 xs:mt-1 text-xs xs:text-sm text-gray-600 dark:text-gray-300">
             Manage and track your raffle tickets
           </p>
         </div>
@@ -82,14 +84,14 @@ export default function TicketsPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
-        <nav className="-mb-px flex space-x-8">
+      <div className="border-b border-gray-200/80 dark:border-gray-700/80">
+        <nav className="-mb-px flex space-x-4 xs:space-x-6 sm:space-x-8 overflow-x-auto">
           {(['all', 'active', 'won', 'lost'] as const).map(status => (
             <button
               key={status}
               onClick={() => setFilter(status)}
               className={`
-                whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
+                whitespace-nowrap py-3 xs:py-4 px-1 border-b-2 font-medium text-xs xs:text-sm
                 ${
                   filter === status
                     ? 'border-[var(--primary-color)] text-[var(--primary-color)]'
@@ -99,7 +101,7 @@ export default function TicketsPage() {
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}
               {status !== 'all' && (
-                <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">
+                <span className="ml-1.5 xs:ml-2 text-[10px] xs:text-xs text-gray-400 dark:text-gray-500">
                   ({MOCK_TICKETS.filter(t => t.status === status).length})
                 </span>
               )}
@@ -109,11 +111,11 @@ export default function TicketsPage() {
       </div>
 
       {/* Tickets List */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
-        <div className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          {/* Table Header */}
-          <div className="bg-gray-50 dark:bg-gray-900/50">
-            <div className="grid grid-cols-7 gap-4 px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm overflow-hidden">
+        <div className="min-w-full divide-y divide-gray-200/80 dark:divide-gray-700/80">
+          {/* Table Header - Hide on mobile */}
+          <div className="hidden sm:block bg-gray-50 dark:bg-gray-900/50">
+            <div className="grid grid-cols-7 gap-3 xs:gap-4 px-4 xs:px-6 py-2 xs:py-3 text-left text-[10px] xs:text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               <div className="col-span-2">Raffle</div>
               <div>Ticket Number</div>
               <div>Purchase Date</div>
@@ -124,34 +126,38 @@ export default function TicketsPage() {
           </div>
 
           {/* Table Body */}
-          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="divide-y divide-gray-200/80 dark:divide-gray-700/80">
             {filteredTickets.map(ticket => (
               <div
                 key={ticket.id}
-                className="grid grid-cols-7 gap-4 px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer group"
+                className="block sm:grid sm:grid-cols-7 gap-2 xs:gap-3 sm:gap-4 px-3 xs:px-4 sm:px-6 py-3 xs:py-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer group"
                 onClick={() => {
                   // TODO: Implement ticket details view
                 }}
               >
-                <div className="col-span-2">
-                  <div className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-[var(--primary-color)] transition-colors">
+                <div className="sm:col-span-2 mb-2 sm:mb-0">
+                  <div className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white group-hover:text-[var(--primary-color)] transition-colors">
                     {ticket.raffleName}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                     ID: {ticket.raffleId}
                   </div>
                 </div>
-                <div className="text-sm text-gray-900 dark:text-white">{ticket.ticketNumber}</div>
-                <div className="text-sm text-gray-900 dark:text-white">
+                <div className="text-xs xs:text-sm text-gray-900 dark:text-white hidden sm:block">
+                  {ticket.ticketNumber}
+                </div>
+                <div className="text-xs xs:text-sm text-gray-900 dark:text-white hidden sm:block">
                   {new Date(ticket.purchaseDate).toLocaleDateString()}
                 </div>
-                <div className="text-sm text-gray-900 dark:text-white">
+                <div className="text-xs xs:text-sm text-gray-900 dark:text-white hidden sm:block">
                   {new Date(ticket.drawDate).toLocaleDateString()}
                 </div>
-                <div className="text-sm text-gray-900 dark:text-white">{ticket.prizeValue}</div>
+                <div className="text-xs xs:text-sm text-gray-900 dark:text-white hidden sm:block">
+                  {ticket.prizeValue}
+                </div>
                 <div>
                   <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(ticket.status)}`}
+                    className={`inline-flex items-center px-2 xs:px-2.5 py-0.5 rounded-full text-[10px] xs:text-xs font-medium ${getStatusColor(ticket.status)}`}
                   >
                     {ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1)}
                   </span>
@@ -163,14 +169,14 @@ export default function TicketsPage() {
 
         {/* Empty State */}
         {filteredTickets.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-8 xs:py-10 sm:py-12">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="mx-auto h-12 w-12 text-gray-400"
+              className="mx-auto h-8 xs:h-10 sm:h-12 w-8 xs:w-10 sm:w-12 text-gray-400"
             >
               <path
                 strokeLinecap="round"
@@ -178,15 +184,15 @@ export default function TicketsPage() {
                 d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z"
               />
             </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
+            <h3 className="mt-1.5 xs:mt-2 text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
               No tickets found
             </h3>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            <p className="mt-0.5 xs:mt-1 text-xs xs:text-sm text-gray-500 dark:text-gray-400">
               {filter === 'all'
                 ? 'Get started by browsing our available raffles.'
                 : `No ${filter} tickets found. Switch filters to see other tickets.`}
             </p>
-            <div className="mt-6">
+            <div className="mt-4 xs:mt-5 sm:mt-6">
               <Link href="/dashboard/active-raffles" className="button-primary">
                 Browse Raffles
               </Link>

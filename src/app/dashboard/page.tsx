@@ -7,15 +7,15 @@ export default function DashboardPage() {
   const { user } = useAuth();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 xs:space-y-6">
       {/* Welcome Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm p-3 xs:p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-lg xs:text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1 xs:mb-2">
               Welcome back, {user?.email?.split('@')[0]}!
             </h1>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm xs:text-base text-gray-600 dark:text-gray-300">
               Here&apos;s an overview of your activity and upcoming raffles.
             </p>
           </div>
@@ -26,25 +26,25 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-3 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-2 xs:gap-3 sm:gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm p-2.5 xs:p-3 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">
+              <p className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">
                 Active Tickets
               </p>
-              <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mt-1">
+              <h3 className="text-base xs:text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mt-0.5 xs:mt-1">
                 12
               </h3>
             </div>
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+            <div className="w-8 xs:w-10 sm:w-12 h-8 xs:h-10 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                className="w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6 text-blue-600 dark:text-blue-400"
               >
                 <path
                   strokeLinecap="round"
@@ -54,10 +54,10 @@ export default function DashboardPage() {
               </svg>
             </div>
           </div>
-          <div className="mt-3 sm:mt-4">
+          <div className="mt-2 xs:mt-3 sm:mt-4">
             <Link
               href="/dashboard/tickets"
-              className="text-xs sm:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
+              className="text-[10px] xs:text-xs sm:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
             >
               View all tickets →
             </Link>
@@ -174,30 +174,30 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-4 sm:p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm">
+        <div className="p-3 xs:p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-3 xs:mb-4">
+            <h2 className="text-sm xs:text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
               Recent Activity
             </h2>
             <Link
               href="/dashboard/transactions"
-              className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
+              className="text-xs xs:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80"
             >
               View all →
             </Link>
           </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between py-2 sm:py-3 border-b border-gray-200 dark:border-gray-700">
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+          <div className="space-y-3 xs:space-y-4">
+            <div className="flex items-center justify-between py-1.5 xs:py-2 sm:py-3 border-b border-gray-200/80 dark:border-gray-700/80">
+              <div className="flex items-center space-x-1.5 xs:space-x-2 sm:space-x-3">
+                <div className="w-7 xs:w-8 sm:w-10 h-7 xs:h-8 sm:h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-5 h-5 text-blue-600 dark:text-blue-400"
+                    className="w-4 xs:w-5 sm:w-5 h-4 xs:h-5 sm:h-5 text-blue-600 dark:text-blue-400"
                   >
                     <path
                       strokeLinecap="round"

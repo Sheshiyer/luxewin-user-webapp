@@ -45,8 +45,8 @@ const MOCK_RAFFLES = [
 
 export function FeaturedRaffles() {
   return (
-    <section id="featured-raffles" className="py-12 sm:py-16 md:py-24 bg-[#0A0A0A]">
-      <div className="container mx-auto px-3 sm:px-4 relative overflow-hidden">
+    <section id="featured-raffles" className="py-8 sm:py-16 md:py-24 bg-[#0A0A0A]">
+      <div className="container mx-auto px-2 xs:px-3 sm:px-4 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(51,153,255,0.02)_1px,transparent_1px),linear-gradient(0deg,rgba(51,153,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
@@ -56,39 +56,39 @@ export function FeaturedRaffles() {
 
         {/* Section Header */}
         <div className="relative max-w-3xl mx-auto text-center mb-8 sm:mb-12 md:mb-16">
-          <span className="inline-block text-xs sm:text-sm font-semibold text-[#3399FF] mb-3 sm:mb-4 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#3399FF]/10">
+          <span className="inline-block text-[10px] xs:text-xs sm:text-sm font-semibold text-[#3399FF] mb-2 sm:mb-4 px-2 xs:px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#3399FF]/10">
             Featured Opportunities
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#3399FF] to-[#00FFCC] px-2">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#3399FF] to-[#00FFCC] px-2">
             Enter now for a chance to win these exclusive prizes
           </h2>
-          <p className="text-base sm:text-lg text-gray-400 px-4 sm:px-0">
+          <p className="text-sm xs:text-base sm:text-lg text-gray-400 px-2 xs:px-4 sm:px-0">
             Join our premium raffles with the best odds and exclusive prizes.
           </p>
         </div>
 
         {/* Raffles Grid */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-6 md:gap-8 lg:gap-10">
           {MOCK_RAFFLES.map(raffle => (
             <div key={raffle.id} className="card-interactive group">
-              <div className="aspect-w-16 aspect-h-9 relative h-40 sm:h-48">
+              <div className="aspect-w-16 aspect-h-9 relative h-36 xs:h-40 sm:h-48">
                 <Image src={raffle.image} alt={raffle.title} fill className="object-cover" />
                 <div className="absolute top-4 right-4">
-                  <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-black/50 text-[#3399FF] backdrop-blur-sm">
+                  <span className="inline-flex items-center px-1.5 xs:px-2 sm:px-3 py-0.5 xs:py-1 rounded-full text-[10px] xs:text-xs sm:text-sm font-medium bg-black/50 text-[#3399FF] backdrop-blur-sm">
                     Value: {raffle.value}
                   </span>
                 </div>
               </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-base sm:text-lg font-semibold text-white mb-1.5 sm:mb-2 group-hover:text-[#3399FF] transition-colors">
+              <div className="p-3 xs:p-4 sm:p-6">
+                <h3 className="text-sm xs:text-base sm:text-lg font-semibold text-white mb-1 xs:mb-1.5 sm:mb-2 group-hover:text-[#3399FF] transition-colors">
                   {raffle.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4">
+                <p className="text-[10px] xs:text-xs sm:text-sm text-gray-400 mb-2 xs:mb-3 sm:mb-4">
                   {raffle.description}
                 </p>
                 <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between text-sm mb-1">
+                    <div className="flex justify-between text-xs xs:text-sm mb-1">
                       <span className="text-gray-400">Tickets Available</span>
                       <span className="text-white font-medium">
                         {raffle.ticketsSold}/{raffle.totalTickets}
@@ -106,17 +106,17 @@ export function FeaturedRaffles() {
                       <p className="text-sm text-gray-400">Price per ticket</p>
                       <p className="text-lg font-semibold text-[#3399FF]">${raffle.ticketPrice}</p>
                     </div>
-                    <button className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white text-sm rounded-lg hover:opacity-90 transition-opacity">
+                    <button className="px-2 xs:px-3 sm:px-4 py-1 xs:py-1.5 sm:py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white text-xs xs:text-sm rounded-lg hover:opacity-90 transition-opacity">
                       Enter Raffle
                     </button>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-400">
+                  <div className="flex items-center justify-between text-xs xs:text-sm">
+                    <span className="text-gray-400 truncate mr-2">
                       Ends {new Date(raffle.endDate).toLocaleDateString()}
                     </span>
                     <span
                       className={`
-                      px-2 py-1 rounded-full text-xs font-medium
+                      px-1.5 xs:px-2 py-0.5 xs:py-1 rounded-full text-[10px] xs:text-xs font-medium
                       ${
                         raffle.ticketsSold / raffle.totalTickets > 0.8
                           ? 'bg-red-900/30 text-red-400'
@@ -138,7 +138,7 @@ export function FeaturedRaffles() {
         {/* View All Button */}
         <div className="relative text-center mt-8 sm:mt-12 md:mt-16">
           <div className="inline-flex flex-col sm:flex-row items-center gap-2">
-            <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white text-sm sm:text-base rounded-lg hover:opacity-90 transition-opacity">
+            <button className="w-full sm:w-auto px-4 xs:px-6 sm:px-8 py-2 xs:py-2.5 sm:py-3 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white text-xs xs:text-sm sm:text-base rounded-lg hover:opacity-90 transition-opacity">
               View All Raffles
             </button>
             <span className="text-sm text-gray-400">{MOCK_RAFFLES.length}+ active raffles</span>

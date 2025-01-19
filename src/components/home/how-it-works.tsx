@@ -89,9 +89,9 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-gray-50/50 dark:bg-gray-900/50"
+      className="py-8 sm:py-16 md:py-24 relative overflow-hidden bg-gray-50/50 dark:bg-gray-900/50"
     >
-      <div className="container mx-auto px-3 sm:px-4 relative z-10">
+      <div className="container mx-auto px-2 xs:px-3 sm:px-4 relative z-10">
         {/* Background Elements */}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,102,204,0.03)_1px,transparent_1px),linear-gradient(0deg,rgba(0,102,204,0.03)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
@@ -100,33 +100,33 @@ export function HowItWorks() {
         <div className="absolute -right-32 bottom-0 w-64 h-64 bg-[var(--secondary-color)]/10 rounded-full blur-3xl" />
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12 md:mb-16">
-          <span className="inline-block text-xs sm:text-sm font-semibold text-[var(--primary-color)] mb-3 sm:mb-4 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[var(--primary-color)]/10">
+          <span className="inline-block text-[10px] xs:text-xs sm:text-sm font-semibold text-[var(--primary-color)] mb-2 sm:mb-4 px-2 xs:px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[var(--primary-color)]/10">
             Simple Process
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-color)] to-[var(--secondary-color)] px-2">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-color)] to-[var(--secondary-color)] px-2">
             How LuxeWin Works
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 px-4 sm:px-0">
+          <p className="text-sm xs:text-base sm:text-lg text-gray-600 dark:text-gray-300 px-2 xs:px-4 sm:px-0">
             Join thousands of winners in our transparent and secure raffle platform. Here&apos;s how
             to get started:
           </p>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 lg:gap-12">
           {STEPS.map((step, index) => (
             <div key={index} className="relative flex flex-col items-center text-center">
               {/* Step Number */}
               {/* Icon Container */}
               <div className="relative">
-                <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-full bg-gradient-to-br from-[var(--primary-color)]/20 to-[var(--secondary-color)]/20 flex items-center justify-center mb-4 sm:mb-6 transform transition-transform duration-300 group-hover:scale-110">
-                  <div className="w-7 sm:w-8 h-7 sm:h-8 text-[var(--primary-color)]">
+                <div className="w-12 xs:w-14 sm:w-16 h-12 xs:h-14 sm:h-16 rounded-full bg-gradient-to-br from-[var(--primary-color)]/20 to-[var(--secondary-color)]/20 flex items-center justify-center mb-3 xs:mb-4 sm:mb-6 transform transition-transform duration-300 group-hover:scale-110">
+                  <div className="w-6 xs:w-7 sm:w-8 h-6 xs:h-7 sm:h-8 text-[var(--primary-color)]">
                     {step.icon}
                   </div>
                 </div>
 
                 {/* Step Number */}
-                <div className="absolute -top-2 -right-2 w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-[var(--primary-color)] text-white text-xs sm:text-sm font-bold flex items-center justify-center">
+                <div className="absolute -top-1.5 xs:-top-2 -right-1.5 xs:-right-2 w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6 rounded-full bg-[var(--primary-color)] text-white text-[10px] xs:text-xs sm:text-sm font-bold flex items-center justify-center">
                   {index + 1}
                 </div>
 
@@ -140,10 +140,10 @@ export function HowItWorks() {
               </div>
 
               {/* Content */}
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-[var(--primary-color)]">
+              <h3 className="text-base xs:text-lg sm:text-xl font-semibold mb-1.5 xs:mb-2 sm:mb-3 text-[var(--primary-color)]">
                 {step.title}
               </h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+              <p className="text-xs xs:text-sm sm:text-base text-gray-600 dark:text-gray-300">
                 {step.description}
               </p>
             </div>
@@ -155,11 +155,11 @@ export function HowItWorks() {
           <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
             <a
               href="/auth/sign-up"
-              className="w-full sm:w-auto button-primary px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base hover:scale-105 transition-transform duration-300"
+              className="w-full sm:w-auto button-primary px-4 xs:px-6 sm:px-8 py-2 xs:py-2.5 sm:py-3 text-xs xs:text-sm sm:text-base hover:scale-105 transition-transform duration-300"
             >
               Get Started Now
             </a>
-            <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+            <span className="text-[10px] xs:text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               No credit card required
             </span>
           </div>

@@ -16,7 +16,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -36,7 +36,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -56,7 +56,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -76,7 +76,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -96,7 +96,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -116,7 +116,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -136,7 +136,7 @@ const ADMIN_MENU = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5"
+        className="w-4 xs:w-5 h-4 xs:h-5"
       >
         <path
           strokeLinecap="round"
@@ -167,7 +167,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--primary-color)]"></div>
+        <div className="animate-spin rounded-full h-8 xs:h-12 w-8 xs:w-12 border-t-2 border-b-2 border-[var(--primary-color)]"></div>
       </div>
     );
   }
@@ -182,19 +182,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="flex min-h-screen bg-[var(--background)]">
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[var(--background)] text-[var(--foreground)] hover:bg-[var(--background-light)] transition-colors"
+          className="lg:hidden fixed top-3 xs:top-4 left-2 xs:left-4 z-50 p-1.5 xs:p-2 rounded-lg bg-[var(--background)] text-[var(--foreground)] hover:bg-[var(--background-light)] transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <div className="w-5 h-5 flex flex-col justify-center space-y-1.5">
+          <div className="w-4 xs:w-5 h-4 xs:h-5 flex flex-col justify-center space-y-1 xs:space-y-1.5">
             <span
-              className={`block h-0.5 w-5 bg-current transform transition-transform ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}
+              className={`block h-0.5 w-4 xs:w-5 bg-current transform transition-transform ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5 xs:translate-y-2' : ''}`}
             />
             <span
-              className={`block h-0.5 w-5 bg-current transform transition-opacity ${isMobileMenuOpen ? 'opacity-0' : ''}`}
+              className={`block h-0.5 w-4 xs:w-5 bg-current transform transition-opacity ${isMobileMenuOpen ? 'opacity-0' : ''}`}
             />
             <span
-              className={`block h-0.5 w-5 bg-current transform transition-transform ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}
+              className={`block h-0.5 w-4 xs:w-5 bg-current transform transition-transform ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5 xs:-translate-y-2' : ''}`}
             />
           </div>
         </button>
@@ -209,49 +209,53 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Sidebar */}
         <aside
-          className={`fixed inset-y-0 left-0 w-[280px] lg:w-64 bg-[var(--background)] border-r border-gray-800 transform transition-transform duration-300 lg:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 w-[240px] xs:w-[280px] lg:w-64 bg-[var(--background)] border-r border-gray-800/80 transform transition-transform duration-300 lg:translate-x-0 ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
           <div className="flex flex-col h-full">
             {/* Admin Info */}
-            <div className="p-4 border-b border-gray-800">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-[var(--primary-color)]/10 flex items-center justify-center">
-                  <span className="text-[var(--primary-color)] font-semibold">A</span>
+            <div className="p-3 xs:p-4 border-b border-gray-800/80">
+              <div className="flex items-center space-x-2 xs:space-x-3">
+                <div className="w-8 xs:w-10 h-8 xs:h-10 rounded-full bg-[var(--primary-color)]/10 flex items-center justify-center">
+                  <span className="text-[var(--primary-color)] text-sm xs:text-base font-semibold">
+                    A
+                  </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-[var(--foreground)] truncate">
+                  <p className="text-xs xs:text-sm font-medium text-[var(--foreground)] truncate">
                     Admin Panel
                   </p>
-                  <p className="text-xs text-[var(--primary-color)]">Administrator</p>
+                  <p className="text-[10px] xs:text-xs text-[var(--primary-color)]">
+                    Administrator
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 p-4 space-y-1">
+            <nav className="flex-1 p-3 xs:p-4 space-y-0.5 xs:space-y-1">
               {ADMIN_MENU.map(item => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center px-4 py-2 text-sm rounded-lg hover:bg-[var(--background-light)]/50 ${
+                  className={`flex items-center px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm rounded-lg hover:bg-[var(--background-light)]/50 ${
                     pathname === item.href
                       ? 'bg-[var(--primary-color)]/10 text-[var(--primary-color)]'
                       : 'text-[var(--foreground)] hover:opacity-80'
                   }`}
                 >
-                  <span className="mr-3">{item.icon}</span>
+                  <span className="mr-2 xs:mr-3">{item.icon}</span>
                   {item.title}
                 </Link>
               ))}
             </nav>
 
             {/* Sign Out Button */}
-            <div className="p-4 border-t border-gray-800">
+            <div className="p-3 xs:p-4 border-t border-gray-800/80">
               <button
                 onClick={() => signOut()}
-                className="flex items-center justify-center w-full space-x-2 px-4 py-2 text-sm text-[var(--primary-color)] hover:opacity-80 hover:bg-[var(--primary-color)]/10 rounded-lg transition-colors"
+                className="flex items-center justify-center w-full space-x-1.5 xs:space-x-2 px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm text-[var(--primary-color)] hover:opacity-80 hover:bg-[var(--primary-color)]/10 rounded-lg transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -259,7 +263,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-5 h-5"
+                  className="w-4 xs:w-5 h-4 xs:h-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -275,7 +279,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Main Content */}
         <main className="flex-1 lg:ml-64 bg-[var(--background)]">
-          <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 mt-12 lg:mt-0 min-h-[calc(100vh-3rem)]">
+          <div className="container mx-auto px-3 xs:px-4 sm:px-6 py-4 xs:py-6 sm:py-8 mt-10 xs:mt-12 lg:mt-0 min-h-[calc(100vh-3rem)]">
             {children}
           </div>
         </main>

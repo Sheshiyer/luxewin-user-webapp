@@ -150,11 +150,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#0A0A0A] text-white hover:bg-gray-800 transition-colors"
+          className="lg:hidden fixed top-3 xs:top-4 left-2 xs:left-4 z-50 p-1.5 xs:p-2 rounded-lg bg-[#0A0A0A] text-white hover:bg-gray-800 transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <div className="w-5 h-5 flex flex-col justify-center space-y-1.5">
+          <div className="w-4 xs:w-5 h-4 xs:h-5 flex flex-col justify-center space-y-1 xs:space-y-1.5">
             <span
               className={`block h-0.5 w-5 bg-current transform transition-transform ${
                 isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
@@ -183,7 +183,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Sidebar */}
         <aside
-          className={`fixed inset-y-0 left-0 w-[280px] lg:w-64 bg-[#0A0A0A] border-r border-gray-800 transform transition-transform duration-300 lg:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 w-[240px] xs:w-[280px] lg:w-64 bg-[#0A0A0A] border-r border-gray-800/80 transform transition-transform duration-300 lg:translate-x-0 ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -191,18 +191,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {/* User Info */}
             <Link
               href="/dashboard/profile"
-              className="block p-4 border-b border-gray-800 hover:bg-gray-800/50 transition-colors"
+              className="block p-3 xs:p-4 border-b border-gray-800/80 hover:bg-gray-800/50 transition-colors"
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center">
-                    <span className="text-[#3399FF] font-semibold">
+                <div className="flex items-center space-x-2 xs:space-x-3">
+                  <div className="w-8 xs:w-10 h-8 xs:h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center">
+                    <span className="text-[#3399FF] text-sm xs:text-base font-semibold">
                       {user.email?.[0].toUpperCase()}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">{user.email}</p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs xs:text-sm font-medium text-white truncate">
+                      {user.email}
+                    </p>
+                    <p className="text-[10px] xs:text-xs text-gray-400">
                       Member since {new Date(user.created_at).toLocaleDateString()}
                     </p>
                   </div>
@@ -211,12 +213,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Link>
 
             {/* Navigation */}
-            <nav className="flex-1 p-4 space-y-1">
+            <nav className="flex-1 p-3 xs:p-4 space-y-0.5 xs:space-y-1">
               {DASHBOARD_MENU.map(item => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center px-4 py-2 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 ${
+                  className={`flex items-center px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 ${
                     pathname === item.href
                       ? 'bg-[var(--primary-color)]/10 text-[var(--primary-color)] dark:text-[var(--primary-color)]'
                       : 'text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white'
@@ -229,10 +231,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </nav>
 
             {/* Sign Out Button */}
-            <div className="p-4 border-t border-gray-800">
+            <div className="p-3 xs:p-4 border-t border-gray-800/80">
               <button
                 onClick={() => signOut()}
-                className="flex items-center justify-center w-full space-x-2 px-4 py-2 text-sm text-red-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                className="flex items-center justify-center w-full space-x-1.5 xs:space-x-2 px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm text-red-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +258,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Main Content */}
         <main className="flex-1 lg:ml-64">
-          <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 mt-12 lg:mt-0">
+          <div className="container mx-auto px-3 xs:px-4 sm:px-6 py-4 xs:py-6 sm:py-8 mt-10 xs:mt-12 lg:mt-0">
             {children}
           </div>
         </main>

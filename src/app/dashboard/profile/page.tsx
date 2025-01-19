@@ -67,20 +67,20 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-4 xs:space-y-6 sm:space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Profile</h1>
+        <h1 className="text-xl xs:text-2xl font-bold text-gray-900 dark:text-white">Profile</h1>
         <button
           onClick={() => setIsEditing(!isEditing)}
-          className="px-4 py-2 text-sm font-medium text-white bg-[var(--primary-color)] rounded-lg hover:bg-[var(--primary-color)]/90 transition-colors"
+          className="px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm font-medium text-white bg-[var(--primary-color)] rounded-lg hover:bg-[var(--primary-color)]/90 transition-colors"
         >
           {isEditing ? 'Cancel' : 'Edit Profile'}
         </button>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-8">
-          <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm">
+        <div className="p-4 xs:p-6 sm:p-8">
+          <form onSubmit={handleSubmit} className="space-y-4 xs:space-y-6 sm:space-y-8">
             {/* Avatar Section */}
             <div className="flex justify-center">
               <AvatarUpload
@@ -90,9 +90,9 @@ export default function ProfilePage() {
             </div>
 
             {/* Basic Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                   Display Name
                 </label>
                 <input
@@ -100,41 +100,41 @@ export default function ProfilePage() {
                   value={formData.displayName}
                   onChange={e => setFormData({ ...formData, displayName: e.target.value })}
                   disabled={!isEditing}
-                  className="input-field w-full"
+                  className="input-field w-full text-xs xs:text-sm"
                   placeholder="Your display name"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                   Email
                 </label>
                 <input
                   type="email"
                   value={user?.email || ''}
                   disabled
-                  className="input-field w-full opacity-60"
+                  className="input-field w-full opacity-60 text-xs xs:text-sm"
                 />
               </div>
             </div>
 
             {/* Bio */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                 Bio
               </label>
               <textarea
                 value={formData.bio}
                 onChange={e => setFormData({ ...formData, bio: e.target.value })}
                 disabled={!isEditing}
-                className="input-field w-full h-24"
+                className="input-field w-full h-20 xs:h-24 text-xs xs:text-sm"
                 placeholder="Tell us about yourself"
               />
             </div>
 
             {/* Location & Website */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                   Location
                 </label>
                 <input
@@ -142,12 +142,12 @@ export default function ProfilePage() {
                   value={formData.location}
                   onChange={e => setFormData({ ...formData, location: e.target.value })}
                   disabled={!isEditing}
-                  className="input-field w-full"
+                  className="input-field w-full text-xs xs:text-sm"
                   placeholder="Your location"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                   Website
                 </label>
                 <input
@@ -155,20 +155,20 @@ export default function ProfilePage() {
                   value={formData.website}
                   onChange={e => setFormData({ ...formData, website: e.target.value })}
                   disabled={!isEditing}
-                  className="input-field w-full"
+                  className="input-field w-full text-xs xs:text-sm"
                   placeholder="https://your-website.com"
                 />
               </div>
             </div>
 
             {/* Social Links */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                   Twitter
                 </label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-xs xs:text-sm">
                     @
                   </span>
                   <input
@@ -176,17 +176,17 @@ export default function ProfilePage() {
                     value={formData.twitter}
                     onChange={e => setFormData({ ...formData, twitter: e.target.value })}
                     disabled={!isEditing}
-                    className="input-field w-full pl-8"
+                    className="input-field w-full pl-8 text-xs xs:text-sm"
                     placeholder="username"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                   Instagram
                 </label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-xs xs:text-sm">
                     @
                   </span>
                   <input
@@ -194,7 +194,7 @@ export default function ProfilePage() {
                     value={formData.instagram}
                     onChange={e => setFormData({ ...formData, instagram: e.target.value })}
                     disabled={!isEditing}
-                    className="input-field w-full pl-8"
+                    className="input-field w-full pl-8 text-xs xs:text-sm"
                     placeholder="username"
                   />
                 </div>
@@ -203,7 +203,7 @@ export default function ProfilePage() {
 
             {/* Phone Number */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                 Phone Number
               </label>
               <input
@@ -211,13 +211,13 @@ export default function ProfilePage() {
                 value={formData.phoneNumber}
                 onChange={e => setFormData({ ...formData, phoneNumber: e.target.value })}
                 disabled={!isEditing}
-                className="input-field w-full"
+                className="input-field w-full text-xs xs:text-sm"
                 placeholder="+1 (555) 000-0000"
               />
             </div>
 
             {/* Error Message */}
-            {error && <div className="text-red-500 text-sm text-center">{error}</div>}
+            {error && <div className="text-red-500 text-xs xs:text-sm text-center">{error}</div>}
 
             {/* Save Button */}
             {isEditing && (
@@ -225,7 +225,7 @@ export default function ProfilePage() {
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="px-6 py-2 bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                  className="px-4 xs:px-6 py-1.5 xs:py-2 text-xs xs:text-sm bg-gradient-to-r from-[#3399FF] to-[#00FFCC] text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
                   {isSaving ? 'Saving...' : 'Save Changes'}
                 </button>

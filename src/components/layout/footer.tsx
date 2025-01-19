@@ -57,23 +57,23 @@ const SOCIAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200/80 dark:border-gray-800/80">
+      <div className="container mx-auto px-2 xs:px-3 sm:px-4 py-8 xs:py-10 sm:py-12">
+        <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-5 gap-4 xs:gap-6 sm:gap-8">
           {/* Logo & Description */}
-          <div className="lg:col-span-2">
-            <Logo className="mb-4" />
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
+          <div className="col-span-2 xs:col-span-3 lg:col-span-2">
+            <Logo className="mb-3 xs:mb-4" />
+            <p className="text-sm xs:text-base text-gray-600 dark:text-gray-300 mb-3 xs:mb-4">
               Experience premium raffles with guaranteed authenticity and transparency. Join
               thousands of winners in our trusted platform.
             </p>
             {/* Social Links */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-3 xs:space-x-4">
               {SOCIAL_LINKS.map(link => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
+                  className="text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transform hover:scale-110 transition-transform"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -87,13 +87,13 @@ export function Footer() {
           {/* Links */}
           {Object.entries(FOOTER_LINKS).map(([title, links]) => (
             <div key={title}>
-              <h3 className="font-semibold mb-4">{title}</h3>
-              <ul className="space-y-3">
+              <h3 className="text-sm xs:text-base font-semibold mb-2 xs:mb-3 sm:mb-4">{title}</h3>
+              <ul className="space-y-2 xs:space-y-3">
                 {links.map(link => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                      className="text-xs xs:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                     >
                       {link.label}
                     </a>
@@ -105,15 +105,15 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-8">
+        <div className="border-t border-gray-200/80 dark:border-gray-800/80 mt-8 xs:mt-10 sm:mt-12 pt-6 xs:pt-7 sm:pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600 dark:text-gray-300 text-sm">
+            <p className="text-[10px] xs:text-xs sm:text-sm text-gray-600 dark:text-gray-300">
               © {new Date().getFullYear()} LuxeWin. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <div className="flex space-x-4 xs:space-x-6 mt-3 xs:mt-4 md:mt-0">
               <a
                 href="/terms"
-                className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="text-[10px] xs:text-xs sm:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
                 Terms
               </a>

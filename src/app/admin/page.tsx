@@ -25,7 +25,7 @@ export default function AdminPage() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6"
         >
           <path
             strokeLinecap="round"
@@ -47,7 +47,7 @@ export default function AdminPage() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6"
         >
           <path
             strokeLinecap="round"
@@ -69,7 +69,7 @@ export default function AdminPage() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6"
         >
           <path
             strokeLinecap="round"
@@ -91,7 +91,7 @@ export default function AdminPage() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6"
         >
           <path
             strokeLinecap="round"
@@ -104,53 +104,62 @@ export default function AdminPage() {
   ]);
 
   return (
-    <div className="space-y-6" key={user?.id}>
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-white">Dashboard Overview</h1>
-        <button className="px-4 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+    <div className="space-y-4 xs:space-y-6" key={user?.id}>
+      <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center gap-3 xs:gap-0">
+        <h1 className="text-xl xs:text-2xl font-semibold text-white">Dashboard Overview</h1>
+        <button className="w-full xs:w-auto px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
           Generate Report
         </button>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-6">
         {stats.map((stat, index) => (
-          <div key={index} className="p-6 bg-[#1A1A1A] rounded-xl shadow-sm border border-gray-800">
+          <div
+            key={index}
+            className="p-3 xs:p-4 sm:p-6 bg-[#1A1A1A] rounded-lg xs:rounded-xl shadow-sm border border-gray-800/80"
+          >
             <div className="flex items-center justify-between">
-              <div className="p-2 bg-gray-800 rounded-lg">
+              <div className="p-1.5 xs:p-2 bg-gray-800 rounded-lg">
                 <div className="text-gray-300">{stat.icon}</div>
               </div>
               <div
-                className={`text-sm font-medium ${
+                className={`text-xs xs:text-sm font-medium ${
                   stat.trend === 'up' ? 'text-green-500' : 'text-red-500'
                 }`}
               >
                 {stat.change}
               </div>
             </div>
-            <div className="mt-4">
-              <h3 className="text-sm font-medium text-gray-400">{stat.title}</h3>
-              <p className="text-2xl font-semibold text-white">{stat.value}</p>
+            <div className="mt-3 xs:mt-4">
+              <h3 className="text-xs xs:text-sm font-medium text-gray-400">{stat.title}</h3>
+              <p className="text-lg xs:text-xl sm:text-2xl font-semibold text-white">
+                {stat.value}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-[#1A1A1A] rounded-xl shadow-sm border border-gray-800 overflow-hidden">
-        <div className="p-6 border-b border-gray-800">
-          <h2 className="text-lg font-medium text-white">Recent Activity</h2>
+      <div className="bg-[#1A1A1A] rounded-lg xs:rounded-xl shadow-sm border border-gray-800/80 overflow-hidden">
+        <div className="p-3 xs:p-4 sm:p-6 border-b border-gray-800/80">
+          <h2 className="text-base xs:text-lg font-medium text-white">Recent Activity</h2>
         </div>
-        <div className="p-6">
-          <div className="space-y-6">
+        <div className="p-3 xs:p-4 sm:p-6">
+          <div className="space-y-3 xs:space-y-4 sm:space-y-6">
             {[1, 2, 3].map((_, index) => (
-              <div key={index} className="flex items-center space-x-4">
-                <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                <div className="flex-1">
-                  <p className="text-sm text-white">New raffle created: Luxury Watch Collection</p>
-                  <p className="text-xs text-gray-400">2 hours ago</p>
+              <div key={index} className="flex items-center space-x-3 xs:space-x-4">
+                <div className="w-1.5 xs:w-2 h-1.5 xs:h-2 rounded-full bg-red-500"></div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs xs:text-sm text-white truncate">
+                    New raffle created: Luxury Watch Collection
+                  </p>
+                  <p className="text-[10px] xs:text-xs text-gray-400">2 hours ago</p>
                 </div>
-                <button className="text-sm text-red-500 hover:text-red-600">View</button>
+                <button className="text-xs xs:text-sm text-red-500 hover:text-red-600 whitespace-nowrap">
+                  View
+                </button>
               </div>
             ))}
           </div>

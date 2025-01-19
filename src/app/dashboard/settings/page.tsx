@@ -42,7 +42,7 @@ export default function Settings() {
   const Toggle = ({ enabled, onChange }: { enabled: boolean; onChange: () => void }) => (
     <button
       type="button"
-      className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2 ${
+      className={`relative inline-flex h-5 xs:h-6 w-9 xs:w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2 ${
         enabled ? 'bg-[var(--primary-color)]' : 'bg-gray-200 dark:bg-gray-700'
       }`}
       role="switch"
@@ -51,45 +51,47 @@ export default function Settings() {
     >
       <span
         aria-hidden="true"
-        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-          enabled ? 'translate-x-5' : 'translate-x-0'
+        className={`pointer-events-none inline-block h-4 xs:h-5 w-4 xs:w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+          enabled ? 'translate-x-4 xs:translate-x-5' : 'translate-x-0'
         }`}
       />
     </button>
   );
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Account Settings</h1>
+    <div className="space-y-4 xs:space-y-6">
+      <h1 className="text-xl xs:text-2xl font-bold text-gray-900 dark:text-white">
+        Account Settings
+      </h1>
 
       {/* Profile Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm">
+        <div className="p-4 xs:p-6">
+          <h2 className="text-base xs:text-lg font-semibold text-gray-900 dark:text-white mb-3 xs:mb-4">
             Profile Information
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-3 xs:space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                 Email Address
               </label>
-              <div className="flex items-center space-x-4">
-                <p className="text-gray-900 dark:text-white">{user?.email}</p>
-                <button className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80">
+              <div className="flex items-center space-x-3 xs:space-x-4">
+                <p className="text-xs xs:text-sm text-gray-900 dark:text-white">{user?.email}</p>
+                <button className="text-xs xs:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80">
                   Change Email
                 </button>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-xs xs:text-sm font-medium text-gray-700 dark:text-gray-300 mb-0.5 xs:mb-1">
                 Member Since
               </label>
-              <p className="text-gray-900 dark:text-white">
+              <p className="text-xs xs:text-sm text-gray-900 dark:text-white">
                 {new Date(user?.created_at || '').toLocaleDateString()}
               </p>
             </div>
             <div>
-              <button className="text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80">
+              <button className="text-xs xs:text-sm text-[var(--primary-color)] hover:text-[var(--primary-color)]/80">
                 Change Password
               </button>
             </div>
@@ -98,16 +100,18 @@ export default function Settings() {
       </div>
 
       {/* Notification Settings */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm">
+        <div className="p-4 xs:p-6">
+          <h2 className="text-base xs:text-lg font-semibold text-gray-900 dark:text-white mb-3 xs:mb-4">
             Notification Settings
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4 xs:space-y-6">
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Raffle Updates</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Raffle Updates
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Get notified about raffle status changes and deadlines
                 </p>
               </div>
@@ -119,9 +123,11 @@ export default function Settings() {
               />
             </div>
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Winning Alerts</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Winning Alerts
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Instant notifications when you win a raffle
                 </p>
               </div>
@@ -133,9 +139,11 @@ export default function Settings() {
               />
             </div>
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Price Alerts</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Price Alerts
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Get notified about special ticket prices and discounts
                 </p>
               </div>
@@ -147,11 +155,11 @@ export default function Settings() {
               />
             </div>
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
                   Promotional Emails
                 </label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Receive news about upcoming raffles and special offers
                 </p>
               </div>
@@ -170,16 +178,18 @@ export default function Settings() {
       </div>
 
       {/* Display Settings */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm">
+        <div className="p-4 xs:p-6">
+          <h2 className="text-base xs:text-lg font-semibold text-gray-900 dark:text-white mb-3 xs:mb-4">
             Display Settings
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4 xs:space-y-6">
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Dark Mode</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Dark Mode
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Switch between light and dark theme
                 </p>
               </div>
@@ -189,9 +199,11 @@ export default function Settings() {
               />
             </div>
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Compact View</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Compact View
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Show more content with reduced spacing
                 </p>
               </div>
@@ -201,9 +213,11 @@ export default function Settings() {
               />
             </div>
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Show Balance</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Show Balance
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Display your account balance in the header
                 </p>
               </div>
@@ -217,18 +231,18 @@ export default function Settings() {
       </div>
 
       {/* Security Settings */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-        <div className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-sm">
+        <div className="p-4 xs:p-6">
+          <h2 className="text-base xs:text-lg font-semibold text-gray-900 dark:text-white mb-3 xs:mb-4">
             Security Settings
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4 xs:space-y-6">
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
                   Two-Factor Authentication
                 </label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Add an extra layer of security to your account
                 </p>
               </div>
@@ -240,9 +254,11 @@ export default function Settings() {
               />
             </div>
             <div className="flex items-center justify-between">
-              <div>
-                <label className="font-medium text-gray-900 dark:text-white">Login Alerts</label>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="pr-4">
+                <label className="text-xs xs:text-sm font-medium text-gray-900 dark:text-white">
+                  Login Alerts
+                </label>
+                <p className="text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
                   Get notified of new sign-ins to your account
                 </p>
               </div>
@@ -251,8 +267,8 @@ export default function Settings() {
                 onChange={() => setSecurity(prev => ({ ...prev, loginAlerts: !prev.loginAlerts }))}
               />
             </div>
-            <div className="pt-4 border-t dark:border-gray-700">
-              <button className="text-sm text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+            <div className="pt-3 xs:pt-4 border-t dark:border-gray-700">
+              <button className="text-xs xs:text-sm text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
                 Delete Account
               </button>
             </div>
