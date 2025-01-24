@@ -145,7 +145,7 @@ export const MOCK_RAFFLES: RaffleDetails[] = [
         prize: 'Rolex Submariner',
         date: '2023-12-01',
         testimonial:
-          "Still can't believe I won! The process was smooth and transparent. Thank you LuxeWin!",
+          "Still can't believe I won! The process was smooth and transparent. Thank you Eliteprize!",
         handoverImage: '/images/handovers/rolex-handover1.png',
       },
       {
@@ -161,7 +161,7 @@ export const MOCK_RAFFLES: RaffleDetails[] = [
       'Prize is non-transferable and cannot be exchanged for cash',
       'Winner is responsible for any applicable taxes',
       'Delivery or collection to be arranged within 30 days of draw',
-      "LuxeWin reserves the right to verify winner's identity and eligibility",
+      "Eliteprize reserves the right to verify winner's identity and eligibility",
       'By entering, participants agree to be featured in promotional materials',
     ],
     deliveryInfo: {

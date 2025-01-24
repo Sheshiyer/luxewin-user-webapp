@@ -97,7 +97,8 @@ export function Winners() {
                 Dream Vacation Package
               </p>
               <p className="text-[10px] xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                &ldquo;Can&apos;t wait for my Maldives trip! LuxeWin made my dream come true.&rdquo;
+                &ldquo;Can&apos;t wait for my Maldives trip! Eliteprize made my dream come
+                true.&rdquo;
               </p>
             </div>
           </div>

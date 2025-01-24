@@ -24,8 +24,79 @@ if (!self.define) {
     a[t] = Promise.all(i.map(e => f[e] || r(e))).then(e => (n(...e), c));
   };
 }
-define(['./workbox-4754cb34'], function (e) {
+define(['./workbox-4754cb34'], function (workbox) {
   'use strict';
+
+  // Handle background sync
+  self.addEventListener('sync', event => {
+    if (event.tag === 'sync-queue') {
+      event.waitUntil(syncQueue());
+    }
+  });
+
+  // Handle push notifications
+  self.addEventListener('push', event => {
+    if (!event.data) return;
+
+    const data = event.data.json();
+    const options = {
+      body: data.body,
+      icon: data.icon || '/icons/icon-192x192.png',
+      badge: '/icons/icon-72x72.png',
+      vibrate: [100, 50, 100],
+      data: data.data || {},
+      actions: data.actions || [],
+    };
+
+    event.waitUntil(self.registration.showNotification(data.title, options));
+  });
+
+  // Handle notification clicks
+  self.addEventListener('notificationclick', event => {
+    event.notification.close();
+
+    const urlToOpen = event.notification.data?.url || '/';
+
+    event.waitUntil(
+      clients
+        .matchAll({
+          type: 'window',
+          includeUncontrolled: true,
+        })
+        .then(windowClients => {
+          // Check if there is already a window/tab open with the target URL
+          for (let client of windowClients) {
+            if (client.url === urlToOpen && 'focus' in client) {
+              return client.focus();
+            }
+          }
+          // If no window/tab is open, open a new one
+          if (clients.openWindow) {
+            return clients.openWindow(urlToOpen);
+          }
+        })
+    );
+  });
+
+  async function syncQueue() {
+    try {
+      const cache = await caches.open('background-sync');
+      const requests = await cache.keys();
+
+      for (const request of requests) {
+        try {
+          await fetch(request.clone());
+          await cache.delete(request);
+        } catch (error) {
+          console.error('Error syncing request:', error);
+        }
+      }
+    } catch (error) {
+      console.error('Error processing sync queue:', error);
+    }
+  }
+
+  ('use strict');
   importScripts(),
     self.skipWaiting(),
     e.clientsClaim(),

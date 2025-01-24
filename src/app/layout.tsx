@@ -1,6 +1,7 @@
 import { Open_Sans, Poppins } from 'next/font/google';
 import { AuthProvider } from '@/contexts/auth-context';
 import InstallPrompt from '@/components/pwa/install-prompt';
+import NotificationPrompt from '@/components/pwa/notification-prompt';
 import '@/styles/globals.css';
 
 const fontSans = Open_Sans({
@@ -25,14 +26,14 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'LuxeWin - Premium Raffle Platform',
+  title: 'Eliteprize - Premium Raffle Platform',
   description: 'Experience premium raffles with guaranteed authenticity and transparency.',
   keywords: ['raffle', 'luxury', 'premium', 'contest', 'win', 'prizes'],
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'LuxeWin',
+    title: 'Eliteprize',
   },
   icons: {
     icon: [
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <AuthProvider>
           {children}
           <InstallPrompt />
+          <NotificationPrompt />
         </AuthProvider>
       </body>
     </html>

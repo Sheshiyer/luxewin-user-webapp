@@ -141,6 +141,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }
   }, [user, loading, router]);
 
+  // Close menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
   if (loading || !user) {
     return null;
   }
@@ -175,7 +180,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Mobile Menu Overlay */}
         <div
-          className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden z-40 ${
             isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
@@ -183,7 +188,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Sidebar */}
         <aside
-          className={`fixed inset-y-0 left-0 w-[240px] xs:w-[280px] lg:w-64 bg-[#0A0A0A] border-r border-gray-800/80 transform transition-transform duration-300 lg:translate-x-0 ${
+          className={`fixed inset-y-0 left-0 w-[220px] xs:w-[260px] lg:w-64 bg-[#0A0A0A] border-r border-gray-800/80 transform transition-transform duration-300 lg:translate-x-0 z-50 ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -218,6 +223,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center px-3 xs:px-4 py-1.5 xs:py-2 text-xs xs:text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50 ${
                     pathname === item.href
                       ? 'bg-[var(--primary-color)]/10 text-[var(--primary-color)] dark:text-[var(--primary-color)]'

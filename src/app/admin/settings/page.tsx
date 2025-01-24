@@ -52,7 +52,7 @@ export default function SettingsPage() {
                       <input
                         type="text"
                         className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm dark:bg-gray-700 dark:text-white"
-                        defaultValue="LuxeWin"
+                        defaultValue="Eliteprize"
                       />
                     </div>
                     <div>
@@ -62,7 +62,7 @@ export default function SettingsPage() {
                       <input
                         type="email"
                         className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm dark:bg-gray-700 dark:text-white"
-                        defaultValue="support@luxewin.com"
+                        defaultValue="support@Eliteprize.com"
                       />
                     </div>
                   </div>
@@ -81,7 +81,7 @@ export default function SettingsPage() {
                       <input
                         type="text"
                         className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm dark:bg-gray-700 dark:text-white"
-                        defaultValue="https://api.luxewin.com/v1"
+                        defaultValue="https://api.Eliteprize.com/v1"
                       />
                     </div>
                     <div>

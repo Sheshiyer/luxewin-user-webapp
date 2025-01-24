@@ -65,7 +65,7 @@ const STEPS = [
   {
     title: 'Claim Your Prize',
     description:
-      'Winners are notified immediately. Claim your prize and enjoy your exclusive win from LuxeWin.',
+      'Winners are notified immediately. Claim your prize and enjoy your exclusive win from Eliteprize.',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ export function HowItWorks() {
             Simple Process
           </span>
           <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-color)] to-[var(--secondary-color)] px-2">
-            How LuxeWin Works
+            How Eliteprize Works
           </h2>
           <p className="text-sm xs:text-base sm:text-lg text-gray-600 dark:text-gray-300 px-2 xs:px-4 sm:px-0">
             Join thousands of winners in our transparent and secure raffle platform. Here&apos;s how

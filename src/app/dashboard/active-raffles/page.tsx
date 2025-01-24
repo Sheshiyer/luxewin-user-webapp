@@ -86,7 +86,7 @@ export default function ActiveRaffles() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-full px-4 sm:px-0 relative z-0">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-white">Active Raffles</h1>
@@ -107,37 +107,57 @@ export default function ActiveRaffles() {
         </div>
       </div>
 
-      {/* Category Tabs */}
-      <div className="border-b border-gray-200 dark:border-gray-700 -mx-4 sm:mx-0">
-        <nav className="-mb-px flex space-x-4 sm:space-x-8 overflow-x-auto px-4 sm:px-0">
-          {CATEGORIES.map(category => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`
-                whitespace-nowrap py-2 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm
-                ${
-                  selectedCategory === category.id
-                    ? 'border-[var(--primary-color)] text-[var(--primary-color)]'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
-                }
-              `}
+      {/* Category Filter */}
+      <div className="sticky top-0 z-10 backdrop-blur-md -mx-4 sm:mx-0 shadow-lg bg-gradient-to-b from-black/10 to-transparent">
+        <div className="sm:border-b sm:border-gray-800/50">
+          {/* Mobile Dropdown */}
+          <div className="sm:hidden px-4 py-3">
+            <select
+              value={selectedCategory}
+              onChange={e => setSelectedCategory(e.target.value as typeof selectedCategory)}
+              className="w-full input-field text-xs bg-[#1A1A1A]/80 border-gray-700/50 focus:border-[#3399FF]"
             >
-              {category.label}
-              {category.id !== 'all' && (
-                <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">
-                  ({MOCK_RAFFLES.filter(r => r.category === category.id).length})
-                </span>
-              )}
-            </button>
-          ))}
-        </nav>
+              {CATEGORIES.map(category => (
+                <option key={category.id} value={category.id}>
+                  {category.label}
+                  {category.id !== 'all' &&
+                    ` (${MOCK_RAFFLES.filter(r => r.category === category.id).length})`}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Desktop Tabs */}
+          <nav className="hidden sm:flex space-x-8 px-4 sm:px-0">
+            {CATEGORIES.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`
+                  whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
+                  ${
+                    selectedCategory === category.id
+                      ? 'border-[var(--primary-color)] text-[var(--primary-color)]'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                  }
+                `}
+              >
+                {category.label}
+                {category.id !== 'all' && (
+                  <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">
+                    ({MOCK_RAFFLES.filter(r => r.category === category.id).length})
+                  </span>
+                )}
+              </button>
+            ))}
+          </nav>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative mt-6">
         {filteredRaffles.map(raffle => (
-          <div key={raffle.id} className="card-interactive group">
-            <div className="relative w-full pt-[56.25%]">
+          <div key={raffle.id} className="card-interactive group w-full overflow-hidden rounded-xl">
+            <div className="relative w-full pt-[56.25%] overflow-hidden rounded-t-xl">
               <Image
                 src={raffle.image}
                 alt={raffle.name}

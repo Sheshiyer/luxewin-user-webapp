@@ -45,7 +45,46 @@ export default function BlockchainPage() {
                   Deploy Contract
                 </button>
               </div>
-              <div className="overflow-x-auto">
+              {/* Mobile View */}
+              <div className="block sm:hidden">
+                <div className="space-y-4">
+                  {/* Sample row */}
+                  <div className="bg-[var(--background)] p-4 rounded-lg border border-gray-800/80">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <h3 className="text-sm font-medium text-[var(--foreground)]">
+                            Raffle Contract
+                          </h3>
+                          <span className="text-xs text-[var(--foreground)]/60">0x1234...5678</span>
+                        </div>
+                        <div className="mt-2 space-y-1">
+                          <p className="text-xs text-[var(--foreground)]/60">
+                            Network: Ethereum Mainnet
+                          </p>
+                          <p className="text-xs text-[var(--foreground)]/60">
+                            Last Updated: 2024-01-20
+                          </p>
+                        </div>
+                      </div>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                        Active
+                      </span>
+                    </div>
+                    <div className="mt-4 flex justify-end space-x-3">
+                      <button className="px-3 py-1.5 text-xs bg-[var(--primary-color)] text-[var(--foreground)] rounded-lg hover:opacity-90">
+                        Update
+                      </button>
+                      <button className="px-3 py-1.5 text-xs border border-gray-800/80 rounded-lg hover:bg-[var(--background-light)]">
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop View */}
+              <div className="hidden sm:block overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                   <thead className="bg-gray-50 dark:bg-gray-900">
                     <tr>

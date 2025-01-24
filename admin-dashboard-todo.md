@@ -1,4 +1,4 @@
-# LuxeWin Admin Dashboard Development Tasks
+# Eliteprize Admin Dashboard Development Tasks
 
 ## Phase 1: Core Infrastructure & Components
 

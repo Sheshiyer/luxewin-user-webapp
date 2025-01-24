@@ -138,13 +138,15 @@
   .card {
     @apply bg-[#1A1A1A] rounded-xl shadow-lg
            transition-shadow duration-200
-           border border-gray-800;
+           border border-gray-800
+           relative;
   }
 
   .card-interactive {
     @apply card hover:shadow-xl cursor-pointer
            hover:border-[#3399FF]
-           transition-all duration-200;
+           transition-all duration-200
+           relative isolate;
   }
 
   /* Custom gradient button */
